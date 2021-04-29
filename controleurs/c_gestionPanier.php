@@ -82,9 +82,9 @@ switch($action)
 		{
 			$raisonSociale = $client['raisonSociale'];
 			$adresse = $client['adresse'];
-			$ville = $client['villeClient'];
-			$cp = $client['cpClient'];
-			$mail = $client['mailClient'];
+			$ville = $client['ville'];
+			$cp = $client['cp'];
+			$mail = $client['mail'];
 
 			$desIdProduit = getLesIdProduitsDuPanier();
 			$lesProduitsDuPanier = $pdo->getLesProduitsDuTableau($desIdProduit);
@@ -118,11 +118,14 @@ switch($action)
 		$idClient = $client['id'];
 		$prix = $_SESSION['prixTotal'];
 
+		$desQtesProduit = getLesQteProduitsDuPanier();
 		$lesIdProduit = getLesIdProduitsDuPanier();
+		$lesProduitsDuPanier = $pdo->getLesProduitsDuTableau($lesIdProduit);
+
 		$pdo->creerCommande($idClient, $lesIdProduit, $prix);
 			
 		$message = "Commande enregistrée";
-		// supprimerPanier();
+		supprimerPanier();
 
 		include ("vues/v_message.php");
 		break;
