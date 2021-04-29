@@ -1,7 +1,7 @@
 ﻿<div id="creationCommande">
 <form method="POST" action="index.php?uc=gererPanier&action=confirmerCommande">
    <fieldset>
-     <legend><br> Commande</legend>
+     <legend> Commande</legend>
 		<p>
 			<label for="raisonSociale">Raison sociale</label>
 			<label id="raisonSociale" type="text" name="raisonSociale" value="<?php echo $raisonSociale ?>" size="30" maxlength="45"><?php echo $raisonSociale ?></label><br>
@@ -27,14 +27,14 @@
          <label id="price" type="text" name="price" value="<?php echo $total ?>" size="30" maxlength="45"><?php echo $total . " euros" ?></label><br>
       </p>
 	  	<p style="text-align:center">
-         <input type="submit" value="Valider" name="valider" onclick="return confirm('Voulez-vous vraiment retirer cet article ?');">
+         <input type="submit" value="Valider" name="valider" style="background-color: #ccff11; border: 1px solid #600" onclick="return confirm('Êtes-vous certain de vouloir valider la commande ?');">
       </p>
    </fieldset>
 </form>
 </div>
 
 <fieldset>
-      <legend><br> Vos articles</legend> <?php
+      <legend> Vos articles</legend> <?php
          $compteur = 0;
          $i = 0;
 
