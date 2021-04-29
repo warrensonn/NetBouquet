@@ -84,9 +84,9 @@ CREATE TABLE IF NOT EXISTS client
   login CHAR (20) NOT NULL,
   mdp CHAR (20) NOT NULL,
   adresse CHAR (32) NULL,
-  cpClient CHAR (5) NULL,
-  villeClient CHAR (32) NULL,
-	mailClient CHAR(50) NULL, 
+  cp CHAR (5) NULL,
+  ville CHAR (32) NULL,
+	mail CHAR(50) NULL,
   PRIMARY KEY(id)
  )
  ENGINE=InnoDB;
