@@ -4,10 +4,15 @@
 <?php 
 	if(isset($_SESSION['login']))
 	{
-		if ($_SESSION['type'] == 'Client') {
-			echo 'Bonjour ' . $_SESSION['type'] . ' ' . $_SESSION['login']. ' bienvenue dans l interface de modification :';
+		if ($_SESSION['type'] == 'administrateur') {
+			echo 'Bonjour ' . $_SESSION['type'] . ' ' . $_SESSION['login']. ', bienvenue dans l interface de modification :';
 		} else {
-			echo 'Bonjour ' . $_SESSION['type'] . ' ' . $_SESSION['login']. ' bienvenue dans votre boutique :';
+			echo 'Bonjour ' . $_SESSION['type'] . ' ' . $_SESSION['login']. ', bienvenue dans votre boutique :';
+			if (isset($_SESSION['inscription'])) {
+				$message = "Votre compte a bien été créé, vous êtes maintenant connecté";
+				include 'vues/v_message.php';
+				unset($_SESSION['inscription']);
+			}
 		}
 	}
 ?>
