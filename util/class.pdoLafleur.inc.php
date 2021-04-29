@@ -116,30 +116,41 @@ class PdoLafleur
 	public function creerCommande($idClient, $lesIdProduit, $prix)
 	{
 		$date = date('Y/m/d');
+		$compteur = 0;
 
 		$requetePrepare = PdoLafleur::$monPdo->prepare(
 			'INSERT INTO commande (dateCommande, idClient, prix) '
 			. 'VALUES (:date, :idClient, :prix)'
 		);
-		$requetePrepare->bindParam(':date', $date, PDO::PARAM_STR);
+		$requetePrepare->bindParam(':date', $date, PDO::PARAM_STR); // mettre manuellement idCommande en le mettant en parametre
         $requetePrepare->bindParam(':idClient', $idClient, PDO::PARAM_INT);
 		$requetePrepare->bindParam(':prix', $prix, PDO::PARAM_INT);
 		$requetePrepare->execute();
 
-		// foreach($lesIdProduit as $unIdProduit)
-		// {
-		// 	$index = array_search($unIdProduit,$_SESSION['produits']);
-		// 	$requetePrepare = PdoLafleur::$monPdo->prepare(
-		// 		'INSERT INTO contenir '
-		// 		. 'VALUES (:unIdCommande, :unIdProduit, :quantité)'
-		// 	);
-		// 	$requetePrepare->bindParam(':unIdCommande', $idCommande, PDO::PARAM_STR);
-        // 	$requetePrepare->bindParam(':unIdProduit', $unIdProduit, PDO::PARAM_STR);
-		// 	$requetePrepare->bindParam(':quantité', $_SESSION['quantite'][$index], PDO::PARAM_INT);
-		// 	// $requetePrepare->execute();
-		// 	print_r(array_keys($_SESSION));
-		// }
-		
+		$requetePrepare = PdoLafleur::$monPdo->prepare(
+			'SELECT max(id) '
+			. 'FROM commande '
+		);
+		$requetePrepare->execute();
+		$idCommande = $requetePrepare->fetch()[0];	// Récupération de l'idCommande pour la table contenir
+
+	    foreach($lesIdProduit as $unIdProduit)
+	    {	    	
+			while (!isset($_SESSION['quantite'][$compteur])) {
+				$compteur++;
+			}
+			$qte = $_SESSION['quantite'][$compteur];
+			$compteur++;
+
+	    	$requetePrepare = PdoLafleur::$monPdo->prepare(		// Insert de toutes les lignes de la commande
+	    		'INSERT INTO contenir '
+	    		. 'VALUES (:unIdCommande, :unIdProduit, :quantite)'
+	    	);
+	    	$requetePrepare->bindParam(':unIdCommande', $idCommande, PDO::PARAM_INT);
+        	$requetePrepare->bindParam(':unIdProduit', $unIdProduit, PDO::PARAM_INT);
+	    	$requetePrepare->bindParam(':quantite', $qte, PDO::PARAM_INT);
+	    	$requetePrepare->execute();
+	    }
 	
 	}
 	
@@ -270,18 +281,6 @@ class PdoLafleur
 		$requetePrepare->execute();	
 	}
 
-	public function articleExiste($id) {
-		$requetePrepare = PdoLafleur::$monPdo->prepare(
-			'SELECT * '
-			. 'FROM produit '
-			. 'WHERE id = :id'
-		);
-		$requetePrepare->bindParam(':id', $id, PDO::PARAM_INT);
-		$requetePrepare->execute();
-		$laLigne = $requetePrepare->fetch();
-		return $laLigne;
-	}
-
 	public function getInfosClient($login) {
 		$requetePrepare = PdoLafleur::$monPdo->prepare(
 			'SELECT * '
@@ -291,6 +290,21 @@ class PdoLafleur
 		$requetePrepare->bindParam(':login', $login, PDO::PARAM_INT);
 		$requetePrepare->execute();
 		return $requetePrepare->fetch();
+	}
+
+	public function creationCompte($raisonSociale, $login, $mdp, $adresse, $cp, $ville, $mail) {
+		$requetePrepare = PdoLafleur::$monPdo->prepare(
+			'INSERT INTO client (raisonSociale, login, mdp, adresse, cp, ville, mail) '
+			. 'VALUES (:raisonSociale, :login, :mdp, :adresse, :cp, :ville, :mail)'
+		);
+		$requetePrepare->bindParam(':raisonSociale', $raisonSociale, PDO::PARAM_STR);
+		$requetePrepare->bindParam(':login', $login, PDO::PARAM_STR);
+		$requetePrepare->bindParam(':mdp', $mdp, PDO::PARAM_STR);
+		$requetePrepare->bindParam(':adresse', $adresse, PDO::PARAM_STR);
+		$requetePrepare->bindParam(':cp', $cp, PDO::PARAM_STR);
+		$requetePrepare->bindParam(':ville', $ville, PDO::PARAM_STR);
+		$requetePrepare->bindParam(':mail', $mail, PDO::PARAM_STR);
+		$requetePrepare->execute();
 	}
 }
 ?>
