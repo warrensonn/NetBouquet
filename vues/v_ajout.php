@@ -29,7 +29,7 @@
 					€
 				</p>
 				<p style="text-align:center">
-					<input type="submit" value="Valider" name="ajouter">
+					<input style="background-color: #ccff11; border: 1px solid #600" type="submit" value="Valider" name="ajouter">
 				</p>
 	</form>
 </div>
