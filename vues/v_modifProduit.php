@@ -19,7 +19,7 @@
 			<input type="text" name="prix" id="prix" value="<?php echo $prix ?>"/>
 		   
 			<br />
-			<input type="submit"/>
+			<input type="submit" value="Modifier" style="background-color: #ccff11; border: 1px solid #600"/>
 	   </p>
 	</form>
 </div>

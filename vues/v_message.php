@@ -1,9 +1,7 @@
-﻿<ul><li>
+﻿¤
 <?php
-      echo $message; ?> <br> <?php
+      echo $message; ?> <br> <br> <?php
 
       if (isset($message2)) {
             echo $message2;
       } ?>
-</li>
-</ul>
