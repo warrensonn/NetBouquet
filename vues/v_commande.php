@@ -1,35 +1,66 @@
 ﻿<div id="creationCommande">
 <form method="POST" action="index.php?uc=gererPanier&action=confirmerCommande">
    <fieldset>
-     <legend>Commande</legend>
+     <legend><br> Commande</legend>
 		<p>
-			<label for="nom">Nom Prénom*</label>
-			<input id="nom" type="text" name="nom" value="<?php echo $nom ?>" size="30" maxlength="45">
+			<label for="raisonSociale">Raison sociale</label>
+			<label id="raisonSociale" type="text" name="raisonSociale" value="<?php echo $raisonSociale ?>" size="30" maxlength="45"><?php echo $raisonSociale ?></label><br>
 		</p>
 		<p>
-			<label for="rue">rue*</label>
-			 <input id="rue" type="text" name="rue" value="<?php echo $rue ?>" size="30" maxlength="45">
+			<label for="Adresse">Adresse</label>
+			<label id="Adresse" type="text" name="Adresse" value="<?php echo $adresse ?>" size="30" maxlength="45"><?php echo $adresse ?></label><br>
 		</p>
 		<p>
-         <label for="cp">code postal* </label>
-         <input id="cp" type="text" name="cp" value="<?php echo $cp ?>" size="10" maxlength="10">
+         <label for="cp">Code postal </label>
+         <label id="cp" type="text" name="cp" value="<?php echo $cp ?>" size="30" maxlength="45"><?php echo $cp ?></label><br>
       </p>
       <p>
-         <label for="ville">ville* </label>
-         <input id="ville" type="text" name="ville"  value="<?php echo $ville ?>" size="25" maxlength="50">
+         <label for="ville">Ville </label>
+         <label id="ville" type="text" name="Ville" value="<?php echo $ville ?>" size="30" maxlength="45"><?php echo $ville ?></label><br>
       </p>
       <p>
-         <label for="mail">mail* </label>
-         <input id="mail" type="text"  name="mail" value="<?php echo $mail ?>" size ="25" maxlength="25">
+         <label for="mail">Adresse mail </label>
+         <label id="mail" type="text" name="mail" value="<?php echo $mail ?>" size="30" maxlength="45"><?php echo $mail ?></label><br>
       </p> 
-	  	<p>
-         <input type="submit" value="Valider" name="valider">
-         <input type="reset" value="Annuler" name="annuler"> 
+      <p>
+         <label for="price">Prix total </label>
+         <label id="price" type="text" name="price" value="<?php echo $total ?>" size="30" maxlength="45"><?php echo $total . " euros" ?></label><br>
       </p>
+	  	<p style="text-align:center">
+         <input type="submit" value="Valider" name="valider" onclick="return confirm('Voulez-vous vraiment retirer cet article ?');">
+      </p>
+   </fieldset>
 </form>
 </div>
 
+<fieldset>
+      <legend><br> Vos articles</legend> <?php
+         $compteur = 0;
+         $i = 0;
 
+         foreach( $lesProduitsDuPanier as $unProduit) 
+         {
+	         $id = $unProduit['id'];
+	         $description = $unProduit['description'];
+	         $image = $unProduit['image'];
+	         $prix = $unProduit['prix'];
+	         // while ($compteur not in $listindexsupprimé) 
+	         //	$qte = $_SESSION['quantite'][$compteur];
+	         // else { $compteur++
+            while (!isset($_SESSION['quantite'][$compteur])) {
+               $compteur+=1;
+            }
+	         $qte = $_SESSION['quantite'][$compteur]; ?>
+		      <p>
+		         <img src="<?php echo $image ?>" alt=image width=100	height=100 /> <?php
+			      echo $description." ($prix €"; 
+			      echo "x".$qte . ") soit " . $prix*$qte . " euros"; 
+			      $compteur++;
+               ?>
+		      </p> <?php		
+         } ?> <br>
+
+</fieldset>
 
 
 

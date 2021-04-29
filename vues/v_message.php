@@ -1,9 +1,9 @@
-﻿<div class="message">
-<ul><li>
+﻿<ul><li>
 <?php
-      echo $message;
-      // echo $id, $description, $prix, $categorie, $image;
-?>
+      echo $message; ?> <br> <?php
+
+      if (isset($message2)) {
+            echo $message2;
+      } ?>
 </li>
 </ul>
-</div>

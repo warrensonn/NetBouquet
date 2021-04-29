@@ -1,7 +1,7 @@
 <div id="admin">
-<form method="POST" action="index.php?uc=administrer&action=verifconnexion">
+<form method="POST" action="index.php?uc=seconnecter&action=verifconnexion">
 <fieldset>
-	<legend>Administrateur</legend>
+	<legend>Connexion</legend>
 		<p>
 			<label for="login">Login*</label>
 			<input id="login" type="login" name="login" size="30" maxlength="45">

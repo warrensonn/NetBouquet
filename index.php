@@ -26,6 +26,9 @@ switch($uc)
 		// include("controleurs/c_gestionProduits.php");
 		include("controleurs/c_connexion.php");
 		break;  
+	case 'gestionProduits':
+		include("controleurs/c_gestionProduits.php");
+		break;
 	case 'deconnexion' :
 		include("controleurs/c_deconnexion.php");
 		break;	 

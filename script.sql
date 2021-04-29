@@ -28,15 +28,10 @@ CREATE  INDEX I_FK_Produit_CATEGORIE
 
 CREATE TABLE IF NOT EXISTS Commande
  (
-   id CHAR (32) NOT NULL,
+   id INT AUTO_INCREMENT NOT NULL,
    dateCommande DATE NULL,
-   nomClient CHAR (32) NULL,
-   prenomClient CHAR (32) NULL,
-   telephone CHAR (12) NULL,
-   adresseRueClient CHAR (32) NULL,
-   cpClient CHAR (5) NULL,
-   villeClient CHAR (32) NULL,
-	 mailClient CHAR(50) NULL, 
+   idClient INT NOT NULL,
+   prix INT NOT NULL,
    PRIMARY KEY (id) 
  ) 
  ENGINE=InnoDB;
@@ -59,7 +54,7 @@ CREATE TABLE IF NOT EXISTS Categorie
 
 CREATE TABLE IF NOT EXISTS Contenir
  (
-	idCommande CHAR (32) NOT NULL ,
+	idCommande INT NOT NULL ,
   idProduit INT (3) NOT NULL, 
   quantité INT (2) NOT NULL,
   PRIMARY KEY (idCommande, idProduit) 
@@ -79,41 +74,7 @@ CREATE  INDEX I_FK_CONTENIR_Produit
 
 
 # -----------------------------------------------------------------------------
-#       CREATION DES REFERENCES DE TABLE
-# -----------------------------------------------------------------------------
-
-
-ALTER TABLE Produit 
-  ADD FOREIGN KEY FK_Produit_CATEGORIE (idCategorie)
-      REFERENCES CATEGORIE (id) ;
-
-
-ALTER TABLE Contenir 
-  ADD FOREIGN KEY FK_CONTENIR_COMMANDE (idCommande)
-      REFERENCES COMMANDE (id) ;
-
-
-ALTER TABLE Contenir 
-  ADD FOREIGN KEY FK_CONTENIR_Produit (idProduit)
-      REFERENCES Produit (id) ;
-
-# -----------------------------------------------------------------------------
-#       TABLE : ADMIN
-# -----------------------------------------------------------------------------
-
-CREATE TABLE IF NOT EXISTS Administrateur
- (
-	 id CHAR (3) NOT NULL,
-   nom CHAR (20) NOT NULL,
-   prenom CHAR (20) NOT NULL,
-   login CHAR(32) NOT NULL,
-   mdp CHAR(32) NOT NULL, 
-   PRIMARY KEY (id) 
- )
- ENGINE=InnoDB; 
-
-# -----------------------------------------------------------------------------
-#       TABLE : ADMIN
+#       TABLE : CLIENT 
 # -----------------------------------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS client
@@ -130,6 +91,44 @@ CREATE TABLE IF NOT EXISTS client
  )
  ENGINE=InnoDB;
 	
+# -----------------------------------------------------------------------------
+#       CREATION DES REFERENCES DE TABLE
+# -----------------------------------------------------------------------------
+
+
+ALTER TABLE Produit 
+  ADD FOREIGN KEY FK_Produit_CATEGORIE (idCategorie)
+      REFERENCES CATEGORIE (id) ;
+
+ALTER TABLE Commande 
+  ADD FOREIGN KEY FK_COMMANDE_CLIENT (idClient)
+      REFERENCES client (id) ;
+
+ALTER TABLE Contenir 
+  ADD FOREIGN KEY FK_CONTENIR_COMMANDE (idCommande)
+      REFERENCES COMMANDE (id) ;
+
+
+ALTER TABLE Contenir 
+  ADD FOREIGN KEY FK_CONTENIR_Produit (idProduit)
+      REFERENCES Produit (id) ;
+
+# -----------------------------------------------------------------------------
+#       TABLE : ADMIN
+# -----------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS administrateur
+ (
+	 id CHAR (3) NOT NULL,
+   nom CHAR (20) NOT NULL,
+   prenom CHAR (20) NOT NULL,
+   login CHAR(32) NOT NULL,
+   mdp CHAR(32) NOT NULL, 
+   PRIMARY KEY (id) 
+ )
+ ENGINE=InnoDB; 
+
+
 
 
 
@@ -164,20 +163,20 @@ INSERT INTO produit VALUES (19, 'Pot de mitonia mauve',83,'images/plantes/papoua
 INSERT INTO produit VALUES (20, 'Pot de phalaonopsis blanc',58,'images/plantes/pionosa.gif','pla');
 INSERT INTO produit VALUES (21, 'Pot de phalaonopsis rose mauve',58,'images/plantes/sabana.gif','pla');
 
-
-
-INSERT INTO commande VALUES ('1101461660', '2021-04-12', 'Dupont', 'Jacques', '060000000000', '12, rue haute', '75001', 'Paris', 'dupont@wanadoo.fr');
-INSERT INTO commande VALUES ('1101461665', '2021-04-20', 'Durant', 'Yves', '061111111111', '23, rue des ombres', '75012', 'Paris', 'durant@free.fr');
-
-INSERT INTO contenir VALUES ('1101461660', 12, 2);
-INSERT INTO contenir VALUES ('1101461660', 3, 1);
-INSERT INTO contenir VALUES ('1101461665', 7, 1);
-INSERT INTO contenir VALUES ('1101461665', 5, 3);
-
 INSERT INTO Administrateur VALUES ('1','Bevilacqua', 'Warren', 'warrenbev', 'warrenbv78');
 INSERT INTO Administrateur VALUES ('2','Cady','Elsa', 'elsacd', 'elsacd78');
 
-INSERT INTO client VALUES (1, 'Linag', 'linag75', 'linagcl', '25 route des coins', '75014', 'Paris', 'linag@gmail.com')
-INSERT INTO client VALUES (2, 'Pasteuri', 'pasteri78', 'pastericl', '4 routes des charmes', '78125', 'Raizeux', 'pasteuri@gmail.com')
+INSERT INTO client VALUES (1, 'Linag', 'linag75', 'linagcl', '25 route des coins', '75014', 'Paris', 'linag@gmail.com');
+INSERT INTO client VALUES (2, 'Pasteuri', 'pasteri78', 'pastericl', '4 routes des charmes', '78125', 'Raizeux', 'pasteuri@gmail.com');
+
+INSERT INTO commande VALUES (1, '2021-04-12', 1, 50);
+INSERT INTO commande VALUES (2, '2021-04-20', 2, 50);
+
+INSERT INTO contenir VALUES (1, 12, 2);
+INSERT INTO contenir VALUES (1, 3, 1);
+INSERT INTO contenir VALUES (2, 7, 1);
+INSERT INTO contenir VALUES (2, 5, 3);
+
+
 
 

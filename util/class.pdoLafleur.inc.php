@@ -49,11 +49,11 @@ class PdoLafleur
 		}
 		return PdoLafleur::$monPdoLafleur;  
 	}
-/**
- * Retourne toutes les catégories sous forme d'un tableau associatif
- *
- * @return le tableau associatif des catégories 
-*/
+	/**
+	 * Retourne toutes les catégories sous forme d'un tableau associatif
+	 *
+	 * @return le tableau associatif des catégories 
+	*/
 	public function getLesCategories()
 	{
 		$requetePrepare = "select * from categorie";
@@ -62,14 +62,13 @@ class PdoLafleur
 		return $lesLignes;
 	}
 
-/**
- * Retourne sous forme d'un tableau associatif tous les produits de la
- * catégorie passée en argument
- * 
- * @param $idCategorie 
- * @return un tableau associatif  
-*/
-
+	/**
+	 * Retourne sous forme d'un tableau associatif tous les produits de la
+	 * catégorie passée en argument
+	 * 
+	 * @param $idCategorie 
+	 * @return un tableau associatif  
+	*/
 	public function getLesProduitsDeCategorie($idCategorie)
 	{
 	    $requetePrepare="select * from produit where idCategorie = '$idCategorie'";
@@ -77,12 +76,13 @@ class PdoLafleur
 		$lesLignes = $res->fetchAll();
 		return $lesLignes; 
 	}
-/**
- * Retourne les produits concernés par le tableau des idProduits passée en argument
- *
- * @param $desIdProduit tableau d'idProduits
- * @return un tableau associatif 
-*/
+
+	/**
+	 * Retourne les produits concernés par le tableau des idProduits passée en argument
+	 *
+	 * @param $desIdProduit tableau d'idProduits
+	 * @return un tableau associatif 
+	 */
 	public function getLesProduitsDuTableau($desIdProduit)
 	{
 		$nbProduits = count($desIdProduit);
@@ -99,44 +99,46 @@ class PdoLafleur
 		}
 		return $lesProduits;
 	}
-/**
- * Crée une commande 
- *
- * Crée une commande à partir des arguments validés passés en paramètre, l'identifiant est
- * construit à partir du maximum existant ; crée les lignes de commandes dans la table contenir à partir du
- * tableau d'idProduit passé en paramètre
- * @param $nom 
- * @param $rue
- * @param $cp
- * @param $ville
- * @param $mail
- * @param $lesIdProduit
- 
-*/
-	public function creerCommande($nom,$rue,$cp,$ville,$mail,$lesIdProduit)
+
+	/**
+	 * Crée une commande 
+	 *
+	 * Crée une commande à partir des arguments validés passés en paramètre, l'identifiant est
+	 * construit à partir du maximum existant ; crée les lignes de commandes dans la table contenir à partir du
+	 * tableau d'idProduit passé en paramètre
+	 * @param $nom 
+	 * @param $rue
+	 * @param $cp
+	 * @param $ville
+	 * @param $mail
+	 * @param $lesIdProduit 
+	*/
+	public function creerCommande($idClient, $lesIdProduit, $prix)
 	{
-		$requetePrepare = "select max(id) as maxi from commande";
-		$res = PdoLafleur::$monPdo->query($requetePrepare);
-		$laLigne = $res->fetch();
-		$maxi = $laLigne['maxi'] ;
-		$maxi++;
-		$idCommande = $maxi;
 		$date = date('Y/m/d');
-		$requetePrepare = "insert into commande values ('$idCommande','$date','$nom','$rue','$cp','$ville','$mail')";
-		$res = PdoLafleur::$monPdo->exec($requetePrepare);
-		foreach($lesIdProduit as $unIdProduit)
-		{
-			$index = array_search($unIdProduit,$_SESSION['produits']);
-			$requetePrepare = PdoLafleur::$monPdo->prepare(
-				'INSERT INTO contenir '
-				. 'VALUES (:unIdCommande,:unIdProduit, :quantité)'
-			);
-			$requetePrepare->bindParam(':unIdCommande', $idCommande, PDO::PARAM_STR);
-        	$requetePrepare->bindParam(':unIdProduit', $unIdProduit, PDO::PARAM_STR);
-			$requetePrepare->bindParam(':quantité', $_SESSION['quantite'][$index], PDO::PARAM_INT);
-			// $requetePrepare->execute();
-			print_r(array_keys($_SESSION));
-		}
+
+		$requetePrepare = PdoLafleur::$monPdo->prepare(
+			'INSERT INTO commande (dateCommande, idClient, prix) '
+			. 'VALUES (:date, :idClient, :prix)'
+		);
+		$requetePrepare->bindParam(':date', $date, PDO::PARAM_STR);
+        $requetePrepare->bindParam(':idClient', $idClient, PDO::PARAM_INT);
+		$requetePrepare->bindParam(':prix', $prix, PDO::PARAM_INT);
+		$requetePrepare->execute();
+
+		// foreach($lesIdProduit as $unIdProduit)
+		// {
+		// 	$index = array_search($unIdProduit,$_SESSION['produits']);
+		// 	$requetePrepare = PdoLafleur::$monPdo->prepare(
+		// 		'INSERT INTO contenir '
+		// 		. 'VALUES (:unIdCommande, :unIdProduit, :quantité)'
+		// 	);
+		// 	$requetePrepare->bindParam(':unIdCommande', $idCommande, PDO::PARAM_STR);
+        // 	$requetePrepare->bindParam(':unIdProduit', $unIdProduit, PDO::PARAM_STR);
+		// 	$requetePrepare->bindParam(':quantité', $_SESSION['quantite'][$index], PDO::PARAM_INT);
+		// 	// $requetePrepare->execute();
+		// 	print_r(array_keys($_SESSION));
+		// }
 		
 	
 	}
@@ -151,7 +153,32 @@ class PdoLafleur
 	 * @param $login
 	 * @param $mdp
 	 */
-	public function verifConnexion($login, $mdp)
+	public function verifConnexionClient($login, $mdp)
+	{
+		$requetePrepare = PdoLafleur::$monPdo->prepare(
+			'SELECT login, mdp '
+			. 'FROM client '
+			. 'WHERE login = :login '
+			. 'AND mdp = :mdp '
+		);
+		$requetePrepare->bindParam(':login', $login, PDO::PARAM_STR);
+        $requetePrepare->bindParam(':mdp', $mdp, PDO::PARAM_STR);
+		$requetePrepare->execute();
+
+		return $requetePrepare->fetch();
+	}
+
+	/**
+	 * fonction de verification de connexion
+	 * 
+	 * Cette fonction permet de verifier le nom de compte et le mot de passe inscrit 
+	 * par l'utilisateur par rapport à la base de données
+	 * connaitre les bons login et mot de passe
+	 *
+	 * @param $login
+	 * @param $mdp
+	 */
+	public function verifConnexionAdmin($login, $mdp)
 	{
 		$requetePrepare = PdoLafleur::$monPdo->prepare(
 			'SELECT login, mdp '
@@ -192,10 +219,15 @@ class PdoLafleur
 	*/
 	public function modifiValeur($idProduit, $description, $prix)
 	{
-		$res="UPDATE produit SET description='$description', prix=$prix WHERE id='$idProduit'";
-		$requetePrepare=PdoLaFleur::$monPdo->exec($res);
-		
-		return requetePrepare;
+		$requetePrepare = PdoLafleur::$monPdo->prepare(
+			'UPDATE produit '
+			. 'SET description = :description, '
+			. 'prix = :prix WHERE id= :unIdProduit'
+		);
+		$requetePrepare->bindParam(':description', $description, PDO::PARAM_STR);
+		$requetePrepare->bindParam(':prix', $prix, PDO::PARAM_INT);
+		$requetePrepare->bindParam(':unIdProduit', $idProduit, PDO::PARAM_INT);
+		$requetePrepare->execute();
 	}
 	
 	/**
@@ -207,10 +239,12 @@ class PdoLafleur
 	*/
 	public function supprimer($id)
 	{
-		$requetePrepare="delete from produit where id='".$id."'";
-		$res=PdoLaFleur::$monPdo->exec($requetePrepare);
-		
-		return res;
+		$requetePrepare = PdoLafleur::$monPdo->prepare(
+			'DELETE FROM produit '
+			. 'WHERE id= :id'
+		);
+		$requetePrepare->bindParam(':id', $id, PDO::PARAM_INT);
+		$requetePrepare->execute();
 	}
 	/**
 	* fonction ajouter
@@ -234,6 +268,29 @@ class PdoLafleur
 		$requetePrepare->bindParam(':image', $image, PDO::PARAM_STR);
 		$requetePrepare->bindParam(':categorie', $categorie, PDO::PARAM_STR);
 		$requetePrepare->execute();	
+	}
+
+	public function articleExiste($id) {
+		$requetePrepare = PdoLafleur::$monPdo->prepare(
+			'SELECT * '
+			. 'FROM produit '
+			. 'WHERE id = :id'
+		);
+		$requetePrepare->bindParam(':id', $id, PDO::PARAM_INT);
+		$requetePrepare->execute();
+		$laLigne = $requetePrepare->fetch();
+		return $laLigne;
+	}
+
+	public function getInfosClient($login) {
+		$requetePrepare = PdoLafleur::$monPdo->prepare(
+			'SELECT * '
+			. 'FROM client '
+			. ' WHERE login = :login'
+		);
+		$requetePrepare->bindParam(':login', $login, PDO::PARAM_INT);
+		$requetePrepare->execute();
+		return $requetePrepare->fetch();
 	}
 }
 ?>

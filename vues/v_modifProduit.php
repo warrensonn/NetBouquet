@@ -7,12 +7,9 @@
 	$image = $unProduit['image'];
 ?>
 <div id="administrer">
-	<form method="post" action="index.php?uc=administrer&action=MiseAJour">
+	<form method="post" action="index.php?uc=gestionProduits&action=MiseAJour&id=<?php echo $id?>">
 	   <p>
-			<br />
-			<label for="idProduit">Id  :</label>
-			<input type="text" name="id" id="id" value="<?php echo $id ?>"/>
-			
+			<img src=<?php echo $image ?> alt="article" title="article">
 			<br />
 			<label for="description">Description  :</label>
 			<input type="text" name="description" id="description" value="<?php echo $description ?>"/>

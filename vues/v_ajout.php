@@ -1,5 +1,5 @@
 ﻿<div id="Ajouter un Produit">
-	<form method="POST" action="index.php?uc=administrer&action=AjouterProduit">
+	<form method="POST" action="index.php?uc=gestionProduits&action=AjouterProduit">
 		<fieldset>
 			<legend>Ajout d'un Produit</legend>
 				<!-- <p>

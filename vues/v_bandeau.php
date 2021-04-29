@@ -4,25 +4,30 @@
 <?php 
 	if(isset($_SESSION['login']))
 	{
-		echo 'Bonjour '.$_SESSION['login'].' bienvenue dans l interface de modification :';
+		if ($_SESSION['type'] == 'Client') {
+			echo 'Bonjour ' . $_SESSION['type'] . ' ' . $_SESSION['login']. ' bienvenue dans l interface de modification :';
+		} else {
+			echo 'Bonjour ' . $_SESSION['type'] . ' ' . $_SESSION['login']. ' bienvenue dans votre boutique :';
+		}
 	}
 ?>
 <!--  Menu haut-->
 <ul id="menu">
 	<li><a href="index.php?uc=accueil"> Accueil </a></li>
-	<li><a href="index.php?uc=voirProduits&action=voirCategories"> Voir le catalogue de fleurs </a></li>
-	<?php
-	if(!isset($_SESSION['login']))
-	{	
-	?>		
-		<li><a href="index.php?uc=gererPanier&action=voirPanier"> Voir son panier </a></li>
-		<li style="margin-left:700px"><a href="index.php?uc=seconnecter&action=connexion"> Se connecter </a></li>	
-	<?php
-	}else{
-	?>
-		<li><a href="index.php?uc=administrer&action=Ajouter"> Ajouter un Produit </a></li>
-		<li style="margin-left:700px"><a href="index.php?uc=deconnexion"> Se Deconnecter </a></li>
-	<?php
+	<li><a href="index.php?uc=voirProduits&action=voirCategories"> Voir le catalogue de fleurs </a></li> <?php
+	
+	if (isset($_SESSION['type'])) {
+		if ($_SESSION['type']=='client') { ?>		
+			<li><a href="index.php?uc=gererPanier&action=voirPanier"> Voir son panier </a></li> <?php
+		} else { ?>
+			<li><a href="index.php?uc=gestionProduits&action=Ajouter"> Ajouter un Produit </a></li> <?php
+		}
 	}
+
+	if(!isset($_SESSION['login'])) { ?> 
+			<li style="float:right"><a href="index.php?uc=seconnecter&action=connexion"> Se connecter </a></li>  <?php
+	} else { ?> 
+			<li style="float:right"><a href="index.php?uc=deconnexion"> Se déconnecter </a></li> <?php
+	} 
 	?>
 </ul>

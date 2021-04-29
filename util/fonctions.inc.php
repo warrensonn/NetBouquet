@@ -107,7 +107,7 @@ function diminuerQte($id){
 
 function retirerDuPanier($idProduit)
 {
-		$index =array_search($idProduit,$_SESSION['produits']);
+		$index =array_search($idProduit, $_SESSION['produits']);
 		unset($_SESSION['produits'][$index]);
 		unset($_SESSION['quantite'][$index]);
 }
@@ -194,4 +194,16 @@ function getErreursSaisieCommande($nom,$rue,$ville,$cp,$mail)
 	}
 	return $lesErreurs;
 }
+
+function qteExiste($compteur)
+{
+	if (isset($_SESSION['quantite'][$compteur])) {
+		$qte = $_SESSION['quantite'][$compteur]; 
+		return $qte;
+	} else { 
+		$compteur+1;
+		qteExiste($compteur);
+	}
+}
+
 ?>

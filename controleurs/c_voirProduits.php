@@ -1,6 +1,7 @@
 ﻿<?php
 initPanier();
 $action = $_REQUEST['action'];
+
 switch($action)
 {
 	case 'voirCategories':

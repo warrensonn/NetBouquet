@@ -10,42 +10,46 @@ switch($action)
 			$desIdProduit = getLesIdProduitsDuPanier();  // contient les idproduits du panier
 			$lesProduitsDuPanier = $pdo->getLesProduitsDuTableau($desIdProduit);	
 			// tableau de clé 0,1,2,3.. avec pour chaque clé un autre de tableau contenant les clés de la table produits avec la valeur de chaque colonne
-
 			$desQtesProduit = getLesQteProduitsDuPanier();
+
 			include("vues/v_panier.php");
 		}
 		else
 		{
-			$message = "Votre panier vide";
+			$message = "Votre panier est vide";
 			include ("vues/v_message.php");
 		}
 		break;
 	}
 
-	case 'supprimerUnProduit':
+	case 'supprimerUnProduit': // il faudrait réussir à mettre dans une liste tous les rangs qui ont été supprimé
+		// $_SESSION['quantite][0] est égal à la quantité du premier article ajouté, $_SESSION['quantite][1] à la quantité du 2e article
+		// je dois sauter les $_SESSION[quantite][x] qui n'ont plus de valeur
 	{
 		$n= nbProduitsDuPanier();
 		if($n >0)
 		{
 			$idProduit=$_REQUEST['produit'];
+
 			retirerDuPanier($idProduit);
+
 			$desIdProduit = getLesIdProduitsDuPanier();
 			$lesProduitsDuPanier = $pdo->getLesProduitsDuTableau($desIdProduit);
 			$desQtesProduit = getLesQteProduitsDuPanier();
+
 			include("vues/v_panier.php");
 		}
 		else
 		{
-			$message = "panier vide !!";
+			$message = "Votre panier est dorénavant vide";
 			include ("vues/v_message.php");
 		}
 		break;
 	}
-		case 'augmenterQte':
+	
+	case 'augmenterQte':
 	{
 		$idProduit=$_REQUEST['produit'];
-	
-	//Fait appel a la fonction dans la classe PDO qui permet d’augmenter la quantité de 1
 	
 		augmenteQte($idProduit);
 		$desIdProduit = getLesIdProduitsDuPanier();
@@ -54,7 +58,8 @@ switch($action)
 		include("vues/v_panier.php");
 		break;
 	}
-		case 'diminuerQte':
+
+	case 'diminuerQte':
 	{
 		$idProduit=$_REQUEST['produit'];
 
@@ -70,49 +75,56 @@ switch($action)
 
 	case 'passerCommande' :
 	    $n= nbProduitsDuPanier();
-
-	//Si $n est supérieur a 0 dans ce cas la commande peut être valider sinon un message panier vide apparait
-
+		$login = $_SESSION['login'];
+		$client = $pdo->getInfosClient($login);
+		
 		if($n>0)
 		{
-			$nom = '';
-			$rue = '';
-			$ville = '';
-			$cp = '';
-			$mail = '';
+			$raisonSociale = $client['raisonSociale'];
+			$adresse = $client['adresse'];
+			$ville = $client['villeClient'];
+			$cp = $client['cpClient'];
+			$mail = $client['mailClient'];
+
+			$desIdProduit = getLesIdProduitsDuPanier();
+			$lesProduitsDuPanier = $pdo->getLesProduitsDuTableau($desIdProduit);
+			$desQtesProduit = getLesQteProduitsDuPanier();
+
+			$total = 0;
+			$compteur=0;
+			foreach( $lesProduitsDuPanier as $unProduit) 
+			{
+				$prix = $unProduit['prix'];
+				while (!isset($_SESSION['quantite'][$compteur])) {
+					$compteur+=1;
+				}
+				$qte = $_SESSION['quantite'][$compteur];
+				$total += $prix*$qte;
+				$compteur++;
+			}
+			$_SESSION['prixTotal'] = $total;
+
 			include ("vues/v_commande.php");
-		}
-		else
-		{
-			$message = "panier vide !!";
+		} else {
+			$message = "Votre panier est vide";
 			include ("vues/v_message.php");
 		}
 		break;
 		
-	case 'confirmerCommande'	:
+	case 'confirmerCommande' :
 	{
-		//Si il y a des champs oublié dans le formulaire de la commande, une message d’erreur apparait sinon la commande est passé et on fait appel a la fonction dans la 		//classe PDO qui permettra d’inscrire dans la base de donnée les coordonnées de la personne qui a passé commande
+		$login = $_SESSION['login'];
+		$client = $pdo->getInfosClient($login);
+		$idClient = $client['id'];
+		$prix = $_SESSION['prixTotal'];
 
-		$nom =$_REQUEST['nom'];
-		$rue=$_REQUEST['rue'];
-		$ville =$_REQUEST['ville'];
-		$cp=$_REQUEST['cp'];
-		$mail=$_REQUEST['mail'];
-	 	$msgErreurs = getErreursSaisieCommande($nom,$rue,$ville,$cp,$mail);
-		if (count($msgErreurs)!=0)
-		{
-			include ("vues/v_erreurs.php");
-			include ("vues/v_commande.php");
-		}
-		else
-		{
-			$lesIdProduit = getLesIdProduitsDuPanier();
-			$pdo->creerCommande($nom,$rue,$cp,$ville,$mail, $lesIdProduit);
+		$lesIdProduit = getLesIdProduitsDuPanier();
+		$pdo->creerCommande($idClient, $lesIdProduit, $prix);
 			
-			$message = "Commande enregistrée";
-			supprimerPanier();
-			include ("vues/v_message.php");
-		}
+		$message = "Commande enregistrée";
+		// supprimerPanier();
+
+		include ("vues/v_message.php");
 		break;
 	}
 }
