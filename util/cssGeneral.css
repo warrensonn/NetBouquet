@@ -48,10 +48,6 @@ input[type="submit"]
    width:30%;
 }
 
-#bandeau {
-
-}
-
 #menu{
 	height: 1.8em ;
 }
@@ -62,10 +58,6 @@ float:left;
 
 #produits{
 padding:0 150px;
-}
-
-#contenu{
-
 }
 
 #menu li {
@@ -94,7 +86,6 @@ padding:0 150px;
     text-align:center;
 	background:#ccff11;
 }
-
 
 #produits li, #produits li a {
 		list-style-type: none;
