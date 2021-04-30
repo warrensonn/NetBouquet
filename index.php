@@ -3,7 +3,6 @@ session_start();
 require_once("util/fonctions.inc.php");
 require_once("util/class.pdoLafleur.inc.php");
 include 'vues/v_entete.php';
-include 'vues/v_bandeau.php';
 
 if(!isset($_REQUEST['uc']))
      $uc = 'accueil';
@@ -14,7 +13,7 @@ $pdo = PdoLafleur::getPdoLafleur();
 switch($uc)
 {
 	case 'accueil':
-		include 'vues/v_accueil.php';
+		include 'vues/v_entreprise.php';
 		break;
 	case 'voirProduits' :
 		include 'controleurs/c_voirProduits.php';
@@ -27,6 +26,9 @@ switch($uc)
 		break;  
 	case 'gestionProduits':
 		include 'controleurs/c_gestionProduits.php';
+		break;
+	case 'historiqueCommandes':
+		include 'controleurs/c_commandes.php';
 		break;
 	case 'deconnexion' :
 		include 'controleurs/c_deconnexion.php';
