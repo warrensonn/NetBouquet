@@ -5,7 +5,7 @@ $action = $_REQUEST['action'];
 switch ($action) {   
 	
     case 'connexion' :		//fait appel a la vue connexion, soit le formulaire qui permet d’inscrire le login et mot de passe permettant de se connecté
-	    include 'vues/v_connexion.php';
+	    include 'vues/v_formConnexion.php';
 	    break;
 
     case 'verifconnexion' :	//verificonnexion fait appel a login et mot de passe ainsi qu’a la fonction situé dans la classe PDO pour vérifier si ces deux champs corresponde avec la base de donnée
@@ -26,7 +26,7 @@ switch ($action) {
         }else {
 		    $message = 'erreur de login ou mot de passe';
 			include 'vues/v_message.php';
-			include 'vues/v_connexion.php';
+			include 'vues/v_formConnexion.php';
 	    }
 	    break;
 		
