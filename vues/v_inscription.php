@@ -10,8 +10,8 @@
     			<input id="login" type="text" name="login" size="30" maxlength="45">
     		</p>
             <p>
-    			<label for="mdp">Mot de passe*</label>
-    			<input id="mdp" type="text" name="mdp" size="30" maxlength="45">
+    			<label for="password">Mot de passe*</label>		//rajouter confirmer mot de passe
+    			<input id="mdp" type="password" name="mdp" size="30" maxlength="45">
     		</p>
     		<p>
     			<label for="adresse">Adresse*</label>
