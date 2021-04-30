@@ -10,7 +10,7 @@
  * $monPdoGsb qui contiendra l'unique instance de la classe
  *
  * @package default
- * @author Patrice Grand
+ * @author Bevilacqua Warren
  * @version    1.0
  * @link       http://www.php.net/manual/fr/book.pdo.php
  */
@@ -305,6 +305,30 @@ class PdoLafleur
 		$requetePrepare->bindParam(':ville', $ville, PDO::PARAM_STR);
 		$requetePrepare->bindParam(':mail', $mail, PDO::PARAM_STR);
 		$requetePrepare->execute();
+	}
+
+	public function getCommandesClient($idClient) {
+		$requetePrepare = PdoLafleur::$monPdo->prepare(
+			'SELECT * '
+			. 'FROM commande '
+			. 'WHERE idClient = :idClient'
+		);
+		$requetePrepare->bindParam(':idClient', $idClient, PDO::PARAM_INT);
+		$requetePrepare->execute();
+		return $requetePrepare->fetchAll();
+	}
+
+	public function getArticlesCommande($idCommande) {
+		$requetePrepare = PdoLafleur::$monPdo->prepare(
+			'SELECT * '
+			. 'FROM contenir '
+			. 'INNER JOIN produit '
+			. 'ON contenir.idProduit = produit.id '
+			. 'WHERE idCommande = :idCommande'
+		);
+		$requetePrepare->bindParam(':idCommande', $idCommande, PDO::PARAM_INT);
+		$requetePrepare->execute();
+		return $requetePrepare->fetchAll();
 	}
 }
 ?>
