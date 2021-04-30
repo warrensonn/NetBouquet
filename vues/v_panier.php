@@ -11,9 +11,7 @@ foreach( $lesProduitsDuPanier as $unProduit)
 	$description = $unProduit['description'];
 	$image = $unProduit['image'];
 	$prix = $unProduit['prix'];
-	// while ($compteur not in $listindexsupprimé) 
-	//	$qte = $_SESSION['quantite'][$compteur];
-	// else { $compteur++
+
 	while (!isset($_SESSION['quantite'][$compteur])) {
 		$compteur+=1;
 	}
