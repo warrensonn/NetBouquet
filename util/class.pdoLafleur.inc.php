@@ -9,18 +9,18 @@
  * $monPdo de type PDO 
  * $monPdoGsb qui contiendra l'unique instance de la classe
  *
- * @package default
- * @author Bevilacqua Warren
- * @version    1.0
- * @link       http://www.php.net/manual/fr/book.pdo.php
+ * @package 	default
+ * @author 		Bevilacqua Warren
+ * @version     1.0
+ * @link        http://www.php.net/manual/fr/book.pdo.php
  */
 
 class PdoLafleur
 {   		
       	private static $serveur='mysql:host=localhost';
-      	private static $bdd='dbname=lafleur';   		
-      	private static $user='root' ;    		
-      	private static $mdp='' ;	
+        private static $bdd='dbname=lafleur';
+        private static $user='lafleur' ;
+        private static $mdp='secret' ;
 		private static $monPdo;
 		private static $monPdoLafleur = null;
 /**
@@ -56,9 +56,12 @@ class PdoLafleur
 	*/
 	public function getLesCategories()
 	{
-		$requetePrepare = "select * from categorie";
-		$res = PdoLafleur::$monPdo->query($requetePrepare);
-		$lesLignes = $res->fetchAll();
+		$requetePrepare = PdoGsb::$monPdo->prepare(
+			'SELECT * '
+			. 'FROM categorie'
+		);
+		$requetePrepare->execute();
+		$lesLignes = $requetePrepare->fetchAll();
 		return $lesLignes;
 	}
 
@@ -71,9 +74,14 @@ class PdoLafleur
 	*/
 	public function getLesProduitsDeCategorie($idCategorie)
 	{
-	    $requetePrepare="select * from produit where idCategorie = '$idCategorie'";
-		$res = PdoLafleur::$monPdo->query($requetePrepare);
-		$lesLignes = $res->fetchAll();
+	    $requetePrepare = PdoGsb::$monPdo->prepare(
+			'SELECT * '
+			. 'FROM produit '
+			. 'WHERE idCategorie = :idCategorie'
+		);
+		$requetePrepare->bindParam(':idCategorie', $idCategorie, PDO::PARAM_STR);
+		$requetePrepare->execute();
+		$lesLignes = $requetePrepare->fetchAll();
 		return $lesLignes; 
 	}
 
@@ -86,18 +94,23 @@ class PdoLafleur
 	public function getLesProduitsDuTableau($desIdProduit)
 	{
 		$nbProduits = count($desIdProduit);
-		$lesProduits=array();
+		$lesLignes=array();
 		if($nbProduits != 0)
 		{
 			foreach($desIdProduit as $unIdProduit)
 			{
-				$requetePrepare = "select * from produit where id = '$unIdProduit'";
-				$res = PdoLafleur::$monPdo->query($requetePrepare);
-				$unProduit = $res->fetch();
-				$lesProduits[] = $unProduit;
+				$requetePrepare = PdoGsb::$monPdo->prepare(
+					'SELECT * '
+					. 'FROM produit '
+					. 'WHERE id = :unIdProduit'
+				);
+				$requetePrepare->bindParam(':unIdProduit', $unIdProduit, PDO::PARAM_INT);
+				$requetePrepare->execute();
+				$unProduit = $requetePrepare->fetch();
+				$lesLignes[] = $unProduit;
 			}
 		}
-		return $lesProduits;
+		return $lesLignes;
 	}
 
 	/**
@@ -106,11 +119,7 @@ class PdoLafleur
 	 * Crée une commande à partir des arguments validés passés en paramètre, l'identifiant est
 	 * construit à partir du maximum existant ; crée les lignes de commandes dans la table contenir à partir du
 	 * tableau d'idProduit passé en paramètre
-	 * @param $nom 
-	 * @param $rue
-	 * @param $cp
-	 * @param $ville
-	 * @param $mail
+	 * 
 	 * @param $lesIdProduit 
 	*/
 	public function creerCommande($idClient, $lesIdProduit, $prix)
@@ -213,10 +222,15 @@ class PdoLafleur
 	 * @param $idProduit
 	 */
 	public function getProduit($idProduit) {
-		$requetePrepare="SELECT * FROM produit WHERE id='".$idProduit."'";
-		$res = PdoLafleur::$monPdo->query($requetePrepare);
-		$produit=$res->fetch();
-		return $produit;
+		$requetePrepare = PdoLafleur::$monPdo->prepare(
+			'SELECT * '
+			. 'FROM produit '
+			. 'WHERE id = :idProduit'
+		);
+		$requetePrepare->bindParam(':idProduit', $idProduit, PDO::PARAM_INT);
+		$requetePrepare->execute();
+		$lesLignes = $requetePrepare->fetch();
+		return $lesLignes;
 	}
 	
 	/**
@@ -248,13 +262,13 @@ class PdoLafleur
 		
 	* @param $id
 	*/
-	public function supprimer($id)
+	public function supprimer($idProduit)
 	{
 		$requetePrepare = PdoLafleur::$monPdo->prepare(
 			'DELETE FROM produit '
-			. 'WHERE id= :id'
+			. 'WHERE id= :idProduit'
 		);
-		$requetePrepare->bindParam(':id', $id, PDO::PARAM_INT);
+		$requetePrepare->bindParam(':idProduit', $idProduit, PDO::PARAM_INT);
 		$requetePrepare->execute();
 	}
 	/**
