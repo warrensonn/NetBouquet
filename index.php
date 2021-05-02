@@ -1,7 +1,18 @@
-<?php
+<?php 
+/**
+ * Index du projet NetBouquet
+ *
+ * PHP Version 7
+ *
+ * @category  PPE
+ * @package   NetBouquet
+ * @author    Bevilacqua Warren <bevilacqua.warren@gmail.com>
+ * @version   GIT: <0>
+ */
+
 session_start();
-require_once("util/fonctions.inc.php");
-require_once("util/class.pdoLafleur.inc.php");
+require_once 'util/fonctions.inc.php';
+require_once 'util/class.pdoLafleur.inc.php';
 include 'vues/v_entete.php';
 
 if(!isset($_REQUEST['uc']))
@@ -34,6 +45,5 @@ switch($uc)
 		include 'controleurs/c_deconnexion.php';
 		break;	 
 }
-include 'vues/v_pied.php';
 ?>
 
