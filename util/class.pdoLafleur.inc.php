@@ -77,7 +77,7 @@ class PdoLafleur
  {
  	$requetePrepare = PdoLaFleur::$monPdo->prepare(
  		'SELECT * '
- 		. 'FROM categorie'
+ 		. 'FROM Categorie'
  	);
  	$requetePrepare->execute();
  	$lesLignes = $requetePrepare->fetchAll();
@@ -99,7 +99,7 @@ class PdoLafleur
  {
      $requetePrepare = PdoLaFleur::$monPdo->prepare(
  		'SELECT * '
- 		. 'FROM produit '
+ 		. 'FROM Produit '
  		. 'WHERE idCategorie = :idCategorie'
  	);
  	$requetePrepare->bindParam(':idCategorie', $idCategorie, PDO::PARAM_STR);
@@ -128,7 +128,7 @@ class PdoLafleur
  		{
  			$requetePrepare = PdoLaFleur::$monPdo->prepare(
  				'SELECT * '
- 				. 'FROM produit '
+ 				. 'FROM Produit '
  				. 'WHERE id = :unIdProduit'
  			);
  			$requetePrepare->bindParam(':unIdProduit', $unIdProduit, PDO::PARAM_INT);
@@ -157,7 +157,7 @@ class PdoLafleur
   	$date = date('Y/m/d');
   	$compteur = 0;  
   	$requetePrepare = PdoLafleur::$monPdo->prepare(
-  		'INSERT INTO commande (dateCommande, idCompte, prix) '
+  		'INSERT INTO Commande (dateCommande, idCompte, prix) '
   		. 'VALUES (:date, :idClient, :prix)'
   	);
   	$requetePrepare->bindParam(':date', $date, PDO::PARAM_STR); // mettre manuellement idCommande en le mettant en parametre
@@ -166,7 +166,7 @@ class PdoLafleur
   	$requetePrepare->execute();  
   	$requetePrepare = PdoLafleur::$monPdo->prepare(
   		'SELECT max(id) '
-  		. 'FROM commande '
+  		. 'FROM Commande '
   	);
   	$requetePrepare->execute();
   	$idCommande = $requetePrepare->fetch()[0];	// Récupération de l'idCommande pour la table contenir  
@@ -178,7 +178,7 @@ class PdoLafleur
   		$qte = $_SESSION['quantite'][$compteur];
   		$compteur++;  
       	$requetePrepare = PdoLafleur::$monPdo->prepare(		// Insert de toutes les lignes de la commande
-      		'INSERT INTO contenir '
+      		'INSERT INTO Contenir '
       		. 'VALUES (:unIdCommande, :unIdProduit, :quantite)'
       	);
       	$requetePrepare->bindParam(':unIdCommande', $idCommande, PDO::PARAM_INT);
@@ -206,7 +206,7 @@ class PdoLafleur
   {
   	$requetePrepare = PdoLafleur::$monPdo->prepare(
   		'SELECT login, mdp, idTypeUtilisateur as type '
-  		. 'FROM compte '
+  		. 'FROM Compte '
   		. 'WHERE login = :login '
   		. 'AND mdp = :mdp '
   	);
@@ -229,7 +229,7 @@ class PdoLafleur
   public function getProduit($idProduit) {
   	$requetePrepare = PdoLafleur::$monPdo->prepare(
   		'SELECT * '
-  		. 'FROM produit '
+  		. 'FROM Produit '
   		. 'WHERE id = :idProduit'
   	);
   	$requetePrepare->bindParam(':idProduit', $idProduit, PDO::PARAM_INT);
@@ -250,7 +250,7 @@ class PdoLafleur
 	public function modifiValeur($idProduit, $description, $prix)
 	{
 		$requetePrepare = PdoLafleur::$monPdo->prepare(
-			'UPDATE produit '
+			'UPDATE Produit '
 			. 'SET description = :description, '
 			. 'prix = :prix WHERE id= :unIdProduit'
 		);
@@ -271,7 +271,7 @@ class PdoLafleur
   public function supprimer($idProduit)
   {
   	$requetePrepare = PdoLafleur::$monPdo->prepare(
-  		'DELETE FROM produit '
+  		'DELETE FROM Produit '
   		. 'WHERE id= :idProduit'
   	);
   	$requetePrepare->bindParam(':idProduit', $idProduit, PDO::PARAM_INT);
@@ -292,7 +292,7 @@ class PdoLafleur
   public function ajouter($categorie, $description, $prix, $image)
   {	
   	$requetePrepare = PdoLafleur::$monPdo->prepare(
-  		'INSERT INTO produit (description, prix, image, idCategorie) '
+  		'INSERT INTO Produit (description, prix, image, idCategorie) '
   		. 'VALUES (:description, :prix, :image, :categorie)'
   	);
   	$requetePrepare->bindParam(':description', $description, PDO::PARAM_STR);
@@ -315,7 +315,7 @@ class PdoLafleur
   public function getInfosClient($login) {
   	$requetePrepare = PdoLafleur::$monPdo->prepare(
   		'SELECT * '
-  		. 'FROM compte '
+  		. 'FROM Compte '
   		. ' WHERE login = :login'
   	);
   	$requetePrepare->bindParam(':login', $login, PDO::PARAM_STR);
@@ -339,7 +339,7 @@ class PdoLafleur
    */
   public function creationCompte($raisonSociale, $login, $mdp, $adresse, $cp, $ville, $mail) {	// idTypeUtilisateur prend la valeur 2 par défaut
 	  $requetePrepare = PdoLafleur::$monPdo->prepare(
-	  	'INSERT INTO compte (raisonSociale, login, mdp, adresse, cp, ville, mail) '
+	  	'INSERT INTO Compte (raisonSociale, login, mdp, adresse, cp, ville, mail) '
 	  	. 'VALUES (:raisonSociale, :login, :mdp, :adresse, :cp, :ville, :mail)'
 	  );
 	  $requetePrepare->bindParam(':raisonSociale', $raisonSociale, PDO::PARAM_STR);
@@ -363,7 +363,7 @@ class PdoLafleur
   public function getCommandesClient($idClient) {
 	 $requetePrepare = PdoLafleur::$monPdo->prepare(
 	 	'SELECT * '
-	 	. 'FROM commande '
+	 	. 'FROM Commande '
 	 	. 'WHERE idCompte = :idClient'
 	 );
 	 $requetePrepare->bindParam(':idClient', $idClient, PDO::PARAM_INT);
@@ -382,14 +382,31 @@ class PdoLafleur
   public function getArticlesCommande($idCommande) {
   	 $requetePrepare = PdoLafleur::$monPdo->prepare(
   		'SELECT * '
-  		. 'FROM contenir '
-  		. 'INNER JOIN produit '
-  		. 'ON contenir.idProduit = produit.id '
+  		. 'FROM Contenir '
+  		. 'INNER JOIN Produit '
+  		. 'ON Contenir.idProduit = Produit.id '
   		. 'WHERE idCommande = :idCommande'
   	 );
   	 $requetePrepare->bindParam(':idCommande', $idCommande, PDO::PARAM_INT);
   	 $requetePrepare->execute();
   	 return $requetePrepare->fetchAll();
+  }
+
+  
+  /**
+   * SHA2
+   *
+   * @param String $mdp   mot de passe saisi
+   * 
+   * @return mot de passe hashé
+   */
+  public function SHA2($mdp) {
+    $requetePrepare = PdoLafleur::$monPdo->prepare(
+      'SELECT SHA2(:mdp, 224) '
+    );
+      $requetePrepare->bindParam(':mdp', $mdp, PDO::PARAM_STR);
+  	  $requetePrepare->execute();
+      return $requetePrepare->fetch()[0];
   }
 
 }
