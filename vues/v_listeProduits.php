@@ -1,6 +1,20 @@
-<div id="produits">
 <?php
-	
+/**
+ * Vue des produits d'une catégorie
+ *
+ * PHP Version 7
+ * 
+ * L'utilisateur voit la liste des produits et peut les ajouter à son panier
+ *
+ * @category  PPE
+ * @package   NetBouquet
+ * @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
+ * @version   GIT: <0>
+ */
+?>
+
+<div id="produits"> <?php
+
 foreach( $lesProduits as $unProduit) 
 {
 	$id = $unProduit['id'];
@@ -26,6 +40,5 @@ foreach( $lesProduits as $unProduit)
 			}		
 		} ?>
 	</ul> <?php		
-}
-?>
+} ?>
 </div>

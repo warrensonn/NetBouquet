@@ -1,4 +1,19 @@
-﻿<div id="Ajouter un Produit">
+﻿<?php
+/**
+ * Vue d'ajout d'un produit
+ *
+ * PHP Version 7
+ * 
+ * L'administrateur peut saisir les informations sur le nouveau produit à ajouter
+ *
+ * @category  PPE
+ * @package   NetBouquet
+ * @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
+ * @version   GIT: <0>
+ */
+?>
+
+<div id="Ajouter un Produit">
 	<form method="POST" action="index.php?uc=gestionProduits&action=AjouterProduit">
 		<fieldset>
 			<legend>Ajout d'un Produit</legend>

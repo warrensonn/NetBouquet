@@ -1,3 +1,18 @@
+<?php
+/**
+ * Vue de la création d'un compte client
+ *
+ * PHP Version 7
+ * 
+ * L'utilisateur doit saisir les informations demandées pour la création d'un compte client
+ *
+ * @category  PPE
+ * @package   NetBouquet
+ * @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
+ * @version   GIT: <0>
+ */
+?>
+
 <form method='POST' action="index.php?uc=seconnecter&action=creationCompte">
     <fieldset>
     	<legend>Création d'un compte client</legend>
@@ -10,7 +25,7 @@
     			<input id="login" type="text" name="login" size="30" maxlength="45">
     		</p>
             <p>
-    			<label for="password">Mot de passe*</label>		//rajouter confirmer mot de passe
+    			<label for="password">Mot de passe*</label>
     			<input id="mdp" type="password" name="mdp" size="30" maxlength="45">
     		</p>
     		<p>
@@ -35,6 +50,3 @@
             </p>
     </fieldset>	
 </form>
-
-<!-- Rajouter toutes les conditions d'acceptation sinon on remet la page avec les erreurs 
-     Les mettre sous le "champs obligatoires" en petit aussi -->

@@ -1,3 +1,18 @@
+<?php
+/**
+ * Vue liste des catégories de produits
+ *
+ * PHP Version 7
+ * 
+ * L'utilisateur peut saisir la catégorie de produits dans la liste proposée
+ *
+ * @category  PPE
+ * @package   NetBouquet
+ * @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
+ * @version   GIT: <0>
+ */
+?>
+
 <ul id="categories">
 <?php
 foreach( $lesCategories as $uneCategorie) 

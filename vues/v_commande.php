@@ -1,4 +1,19 @@
-﻿<div id="creationCommande">
+﻿<?php
+/**
+ * Vue récapitulatif avant validation de la commande
+ *
+ * PHP Version 7
+ * 
+ * Le client peut voir les informations sur la commande, le prix et les articles ainsi que leur quantité. Il peut de plus choisir de valider la commande
+ *
+ * @category  PPE
+ * @package   NetBouquet
+ * @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
+ * @version   GIT: <0>
+ */
+?>
+
+<div id="creationCommande">
 <form method="POST" action="index.php?uc=gererPanier&action=confirmerCommande">
    <fieldset>
      <legend> Commande</legend>
@@ -33,7 +48,7 @@
 </form>
 </div>
 
-<fieldset>
+<fieldset>     <!-- Affiche les articles de la commande avec leur quantité -->
       <legend> Vos articles</legend> <?php
          $compteur = 0;
          $i = 0;
@@ -44,9 +59,6 @@
 	         $description = $unProduit['description'];
 	         $image = $unProduit['image'];
 	         $prix = $unProduit['prix'];
-	         // while ($compteur not in $listindexsupprimé) 
-	         //	$qte = $_SESSION['quantite'][$compteur];
-	         // else { $compteur++
             while (!isset($_SESSION['quantite'][$compteur])) {
                $compteur+=1;
             }
@@ -61,6 +73,4 @@
          } ?> <br>
 
 </fieldset>
-
-
 

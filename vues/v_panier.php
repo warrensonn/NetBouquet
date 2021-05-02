@@ -1,3 +1,18 @@
+<?php
+/**
+ * Vue du panier
+ *
+ * PHP Version 7
+ * 
+ * Le client peut voir les articles du panier, les supprimer du panier ou augmenter / diminuer la quantité
+ *
+ * @category  PPE
+ * @package   NetBouquet
+ * @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
+ * @version   GIT: <0>
+ */
+?>
+
 <img src="images/votrePanier1.png" alt="Panier" title="panier" height="150px" width="300" style="margin-top:-30px"/>
 <img src="images/cady.png"	alt="Panierb" title="panier" height="80px" style="margin-bottom:30px"/>
 <?php
