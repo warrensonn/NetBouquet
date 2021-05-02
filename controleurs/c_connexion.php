@@ -20,7 +20,7 @@ switch ($action) {
 
     case 'verifconnexion' :		// verifiz si le couple login / mot de passe 
 	    $login = $_REQUEST['login'];
-	    $password = $_REQUEST['password'];
+	    $password = $pdo->SHA2($_REQUEST['password'], 224);
 	    $statut = $pdo->verifConnexionCompte($login, $password);	// Fonction renvoyant un tableau si le couple login / mot de passe existe
 
 	    //Si la valeur de statut est correct alors on initialise le $_SESSION et on redirige vers la page d’accueil sinon une erreur de login ou de mot de passe apparait
@@ -47,7 +47,7 @@ switch ($action) {
 	case 'creationCompte' :		// Gère la création du compte client
 		$raisonSociale = $_REQUEST['raisonSociale'];
 		$login = $_REQUEST['login'];
-		$mdp = $_REQUEST['mdp'];
+		$mdp = $pdo->SHA2($_REQUEST['mdp'], 224);
 		$adresse = $_REQUEST['adresse'];
 		$cp = $_REQUEST['cp'];
 		$ville = $_REQUEST['ville'];
