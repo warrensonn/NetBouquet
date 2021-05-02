@@ -1,82 +1,77 @@
 <?php
+/**
+ * Gestion du panier et de son affichage
+ *
+ * PHP Version 7
+ * 
+ * Regroupe les fonctionnalités liées au panier de l'utilisateur et la prise de commandes
+ *
+ * @category  PPE
+ * @package   NetBouquet
+ * @author    Bevilacqua Warren <bevilacqua.warren@gmail.com>
+ * @version   GIT: <0>
+ */
+
 $action = $_REQUEST['action'];
 switch($action)
 {
-	case 'voirPanier':
-	{
+	case 'voirPanier':	  // Lors du clique sur l'onglet 'voir mon panier'
 		$n= nbProduitsDuPanier();
+
 		if($n >0)
 		{
-			$desIdProduit = getLesIdProduitsDuPanier();  // contient les idproduits du panier
+			$desIdProduit = getLesIdProduitsDuPanier();  
 			$lesProduitsDuPanier = $pdo->getLesProduitsDuTableau($desIdProduit);	
-			// tableau de clé 0,1,2,3.. avec pour chaque clé un autre de tableau contenant les clés de la table produits avec la valeur de chaque colonne
-			$desQtesProduit = getLesQteProduitsDuPanier();
-
 			include("vues/v_panier.php");
-		}
-		else
-		{
+		} else {
 			$message = "Votre panier est vide";
 			include ("vues/v_message.php");
 		}
-		break;
-	}
 
-	case 'supprimerUnProduit': // il faudrait réussir à mettre dans une liste tous les rangs qui ont été supprimé
-		// $_SESSION['quantite][0] est égal à la quantité du premier article ajouté, $_SESSION['quantite][1] à la quantité du 2e article
-		// je dois sauter les $_SESSION[quantite][x] qui n'ont plus de valeur
-	{
+		break;
+
+	case 'supprimerUnProduit': 
 		$n= nbProduitsDuPanier();
-		if($n >0)
+		if($n > 1)
 		{
 			$idProduit=$_REQUEST['produit'];
-
 			retirerDuPanier($idProduit);
 
 			$desIdProduit = getLesIdProduitsDuPanier();
 			$lesProduitsDuPanier = $pdo->getLesProduitsDuTableau($desIdProduit);
-			$desQtesProduit = getLesQteProduitsDuPanier();
 
 			include("vues/v_panier.php");
-		}
-		else
-		{
+		} else {
+			$idProduit=$_REQUEST['produit'];
+			retirerDuPanier($idProduit);
+
 			$message = "Votre panier est dorénavant vide";
 			include ("vues/v_message.php");
 		}
 		break;
-	}
 	
-	case 'augmenterQte':
-	{
+	case 'augmenterQte':	// Augmenter la quantité d'un produit du panier
 		$idProduit=$_REQUEST['produit'];
 	
 		augmenteQte($idProduit);
 		$desIdProduit = getLesIdProduitsDuPanier();
 		$lesProduitsDuPanier = $pdo->getLesProduitsDuTableau($desIdProduit);
-		$desQtesProduit = getLesQteProduitsDuPanier();
 		include("vues/v_panier.php");
 		break;
-	}
 
-	case 'diminuerQte':
-	{
+	case 'diminuerQte':		// Diminuer la quantité d'un produit du panier
 		$idProduit=$_REQUEST['produit'];
-
-	//Fait appel a la fonction dans la classe PDO qui permet diminuer la quantité de 1
 
 		diminuerQte($idProduit);
 		$desIdProduit = getLesIdProduitsDuPanier();
 		$lesProduitsDuPanier = $pdo->getLesProduitsDuTableau($desIdProduit);
-		$desQtesProduit = getLesQteProduitsDuPanier();
 		include("vues/v_panier.php");
 		break;
-	}
 
-	case 'passerCommande' :
+	case 'passerCommande' :		// Le client décide de passer une commande
 	    $n= nbProduitsDuPanier();
-		$login = $_SESSION['login'];
-		$client = $pdo->getInfosClient($login);
+		
+		$client = $pdo->getInfosClient($_SESSION['login']);
 		
 		if($n>0)
 		{
@@ -88,7 +83,6 @@ switch($action)
 
 			$desIdProduit = getLesIdProduitsDuPanier();
 			$lesProduitsDuPanier = $pdo->getLesProduitsDuTableau($desIdProduit);
-			$desQtesProduit = getLesQteProduitsDuPanier();
 
 			$total = 0;
 			$compteur=0;
@@ -111,14 +105,11 @@ switch($action)
 		}
 		break;
 		
-	case 'confirmerCommande' :
-	{
+	case 'confirmerCommande' :		// Insertion de la commande dans la base de données
 		$login = $_SESSION['login'];
 		$client = $pdo->getInfosClient($login);
 		$idClient = $client['id'];
 		$prix = $_SESSION['prixTotal'];
-
-		$desQtesProduit = getLesQteProduitsDuPanier();
 		$lesIdProduit = getLesIdProduitsDuPanier();
 		$lesProduitsDuPanier = $pdo->getLesProduitsDuTableau($lesIdProduit);
 
@@ -129,7 +120,7 @@ switch($action)
 
 		include ("vues/v_message.php");
 		break;
-	}
+		
 }
 
 
