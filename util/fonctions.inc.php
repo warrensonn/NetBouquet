@@ -1,10 +1,24 @@
 ﻿<?php
 /**
+ * Fonctions du projet NetBouquet
+ *
+ * PHP Version 7
+ * 
+ * Regroupe toutes les fonctions utilisées dans l'application et qui ne font jamais appel à la base de données
+ *
+ * @category  PPE
+ * @package   NetBouquet
+ * @author    Bevilacqua Warren <bevilacqua.warren@gmail.com>
+ * @version   GIT: <0>
+ */
+
+/**
+ * initPanier
+ * 
  * Initialise le panier
  *
- * Crée une variable de type session dans le cas
- * où elle n'existe pas 
-*/
+ * Crée une variable de type session dans le cas où elle n'existe pas 
+ */
 function initPanier()
 {
 	if(!isset($_SESSION['produits']))
@@ -13,25 +27,35 @@ function initPanier()
 		$_SESSION['quantite']= array();
 	}
 }
+
+
 /**
+ * supprimerPanier
+ * 
  * Supprime le panier
  *
- * Supprime la variable de type session 
+ * Supprime la variable $_SESSION['produits'] contenant les produits du panier
+ * Supprime la variable $_SESSION['quantite'] contenant les quantités des produits du panier
  */
 function supprimerPanier()
 {
 	unset($_SESSION['produits']);
-	unset($_SESSION['qtes']);
+	unset($_SESSION['quantite']);
 }
+
+
 /**
+ * ajouterAuPanier
+ * 
  * Ajoute un produit au panier
  *
- * Teste si l'identifiant du produit est déjà dans la variable session 
- * ajoute l'identifiant à la variable de type session dans le cas où
- * où l'identifiant du produit n'a pas été trouvé
- * @param $idProduit : identifiant de produit
+ * Teste si l'identifiant du produit est déjà dans la variable session['produit'] 
+ * ajoute l'identifiant à la variable de type session dans le cas où l'identifiant du produit n'a pas été trouvé
+ * 
+ * @param Int $idProduit identifiant d'un produit
+ * 
  * @return vrai si le produit n'était pas dans la variable, faux sinon 
-*/
+ */
 function ajouterAuPanier($idProduit)
 {
 	
@@ -47,28 +71,30 @@ function ajouterAuPanier($idProduit)
 	}
 	return $ok;
 }
+
+
 /**
+ * getLesIdProduitsDuPanier
+ * 
  * Retourne les produits du panier
- *
- * Retourne le tableau des identifiants de produit
- * @return : le tableau
+ * 
+ * @return un tableau contenant les idProduits présent dans le panier
 */
 function getLesIdProduitsDuPanier()
 {
 	return $_SESSION['produits']; //array contenant les idproduits du panier
 }
 
-function getLesQteProduitsDuPanier()
-{
-	return $_SESSION['quantite'];
 
-}
 /**
+ * nbProduitsDuPanier
+ * 
  * Retourne le nombre de produits du panier
  *
  * Teste si la variable de session existe
  * et retourne le nombre d'éléments de la variable session
- * @return : le nombre 
+ * 
+ * @return : le nombre de produits du panier
 */
 function nbProduitsDuPanier()
 {
@@ -79,13 +105,29 @@ function nbProduitsDuPanier()
 	return $n;
 }
 
+
+/**
+ * augmenteQte
+ * 
+ * Augmente la quantité d'un produit du panier
+ * 
+ * @param Int $id 	id du produit
+ */
 function augmenteQte($id){
-		$index =array_search($id,$_SESSION['produits']);
+		$index =array_search($id, $_SESSION['produits']);
 		$_SESSION['quantite'][$index]++;
 }
 
+
+/**
+ * diminuerQte
+ * 
+ * Diminue la quantité d'un produit du panier
+ * 
+ * @param Int $id 	id du produit
+ */
 function diminuerQte($id){
-		$index =array_search($id,$_SESSION['produits']);
+		$index =array_search($id, $_SESSION['produits']);
 		if($_SESSION['quantite'][$index]<=1)
 		{
 			$_SESSION['quantite'][$index];
@@ -97,80 +139,113 @@ function diminuerQte($id){
 }
 
 /**
+ * retirerDuPanier
+ * 
  * Retire un de produits du panier
  *
  * Recherche l'index de l'idProduit dans la variable session
  * et détruit la valeur à ce rang
- * @param $idProduit : identifiant de produit
- 
-*/
-
+ * 
+ * @param Int $idProduit	 identifiant du produit
+ */
 function retirerDuPanier($idProduit)
 {
 		$index =array_search($idProduit, $_SESSION['produits']);
 		unset($_SESSION['produits'][$index]);
 		unset($_SESSION['quantite'][$index]);
 }
+
+
 /**
+ * estUnCp
+ * 
  * teste si une chaîne a un format de code postal
  *
  * Teste le nombre de caractères de la chaîne et le type entier (composé de chiffres)
- * @param $codePostal : la chaîne testée
- * @return : vrai ou faux
+ * 
+ * @param String $codePostal 	la chaîne testée
+ * 
+ * @return vrai ou faux
 */
 function estUnCp($codePostal)
 {
    return strlen($codePostal)== 5 && estEntier($codePostal);
 }
+
+
 /**
+ * estEntier
+ * 
  * teste si une chaîne est un entier
  *
  * Teste si la chaîne ne contient que des chiffres
- * @param $valeur : la chaîne testée
- * @return : vrai ou faux
+ * 
+ * @param String $valeur 	la chaîne testée
+ * 
+ * @return vrai ou faux
 */
-
 function estEntier($valeur) 
 {
 	return preg_match("/[^0-9]/", $valeur) == 0;
 }
+
+
 /**
+ * estUnMail
+ * 
  * Teste si une chaîne a le format d'un mail
  *
  * Utilise les expressions régulières
- * @param $mail : la chaîne testée
- * @return : vrai ou faux
+ * 
+ * @param String $mail 	  la chaîne testée
+ * 
+ * @return vrai ou faux
 */
 function estUnMail($mail)
 {
 return  preg_match ('#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#', $mail);
 }
+
+
 /**
+ * getErreursSaisieCommande
+ * 
  * Retourne un tableau d'erreurs de saisie pour une commande
  *
- * @param $nom : chaîne
- * @param $rue : chaîne
- * @param $ville : chaîne
- * @param $cp : chaîne
- * @param $mail : chaîne 
+ * @param String $nom 	 la raison sociale
+ * @param String $login	 le login choisi
+ * @param String $mdp	 Le mot de passe choisi
+ * @param String $rue 	 la rue
+ * @param String $ville  la ville
+ * @param String $cp 	 le cp
+ * @param String $mail 	 le mail 
+ * 
  * @return : un tableau de chaînes d'erreurs
-*/
-function getErreursSaisieCommande($nom,$rue,$ville,$cp,$mail)
+ */
+function getErreursSaisieCommande($raisonSociale, $login, $mdp, $rue, $ville, $cp, $mail)
 {
 	$lesErreurs = array();
-	if($nom=="")
+	if($raisonSociale == "")
 	{
 		$lesErreurs[]="Il faut saisir le champ nom";
 	}
-	if($rue=="")
+	if($login == "")
+	{
+		$lesErreurs[]="Il faut saisir le champ nom";
+	}
+	if($mdp == "")
+	{
+		$lesErreurs[]="Il faut saisir le champ nom";
+	}
+	if($rue == "")
 	{
 	$lesErreurs[]="Il faut saisir le champ rue";
 	}
-	if($ville=="")
+	if($ville == "")
 	{
 		$lesErreurs[]="Il faut saisir le champ ville";
 	}
-	if($cp=="")
+	if($cp == "")
 	{
 		$lesErreurs[]="Il faut saisir le champ Code postal";
 	}
@@ -181,7 +256,7 @@ function getErreursSaisieCommande($nom,$rue,$ville,$cp,$mail)
 			$lesErreurs[]= "erreur de code postal";
 		}
 	}
-	if($mail=="")
+	if($mail == "")
 	{
 		$lesErreurs[]="Il faut saisir le champ mail";
 	}
@@ -193,17 +268,6 @@ function getErreursSaisieCommande($nom,$rue,$ville,$cp,$mail)
 		}
 	}
 	return $lesErreurs;
-}
-
-function qteExiste($compteur)
-{
-	if (isset($_SESSION['quantite'][$compteur])) {
-		$qte = $_SESSION['quantite'][$compteur]; 
-		return $qte;
-	} else { 
-		$compteur+1;
-		qteExiste($compteur);
-	}
 }
 
 ?>
