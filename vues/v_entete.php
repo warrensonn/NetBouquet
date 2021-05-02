@@ -1,3 +1,16 @@
+<?php
+/**
+ * Vue Entête
+ *
+ * PHP Version 7
+ *
+ * @category  PPE
+ * @package   NetBouquet
+ * @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com>
+ * @version   GIT: <0>
+ */
+?>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <div id="bandeau">
@@ -11,23 +24,22 @@
 <meta http-equiv="Content-Language" content="fr">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link href="util/cssGeneral.css" rel="stylesheet" type="text/css">
-</head>
-<body >
+<?php
 
-<?php 
-	if(isset($_SESSION['login']))
+if(isset($_SESSION['login']))
+{
+	if ($_SESSION['type'] == 'administrateur') 
 	{
-		if ($_SESSION['type'] == 'administrateur') {
-			echo 'Bonjour ' . $_SESSION['type'] . ' ' . $_SESSION['login']. ', bienvenue dans l interface de modification :';
-		} else {
-			echo 'Bonjour ' . $_SESSION['type'] . ' ' . $_SESSION['login']. ', bienvenue dans votre boutique :';
-			if (isset($_SESSION['inscription'])) {
-				$message = "Votre compte a bien été créé, vous êtes maintenant connecté";
-				include 'vues/v_message.php';
-				unset($_SESSION['inscription']);
-			}
+		echo 'Bonjour administrateur ' . $_SESSION['login'] . ', bienvenue dans l interface de modification :';
+	} else {
+		echo 'Bonjour client ' . $_SESSION['login'] . ', bienvenue dans votre boutique :';
+		if (isset($_SESSION['inscription'])) {
+			$message = "Votre compte a bien été créé, vous êtes maintenant connecté";
+			include 'vues/v_message.php';
+			unset($_SESSION['inscription']);
 		}
 	}
+}
 ?>
 <!--  Menu haut-->
 <ul id="menu">
