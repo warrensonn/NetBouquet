@@ -169,7 +169,9 @@ class PdoLafleur
   		. 'FROM Commande '
   	);
   	$requetePrepare->execute();
-  	$idCommande = $requetePrepare->fetch()[0];	// Récupération de l'idCommande pour la table contenir  
+    
+  	$idCommande = $requetePrepare->fetch()[0];	// Récupération de l'idCommande pour la table contenir
+
     foreach($lesIdProduit as $unIdProduit)
     {	    	
   		while (!isset($_SESSION['quantite'][$compteur])) {
@@ -177,14 +179,14 @@ class PdoLafleur
   		}
   		$qte = $_SESSION['quantite'][$compteur];
   		$compteur++;  
-      	$requetePrepare = PdoLafleur::$monPdo->prepare(		// Insert de toutes les lignes de la commande
-      		'INSERT INTO Contenir '
-      		. 'VALUES (:unIdCommande, :unIdProduit, :quantite)'
-      	);
-      	$requetePrepare->bindParam(':unIdCommande', $idCommande, PDO::PARAM_INT);
-      	$requetePrepare->bindParam(':unIdProduit', $unIdProduit, PDO::PARAM_INT);
-      	$requetePrepare->bindParam(':quantite', $qte, PDO::PARAM_INT);
-      	$requetePrepare->execute();
+      $requetePrepare = PdoLafleur::$monPdo->prepare(		// Insert de toutes les lignes de la commande
+      	'INSERT INTO Contenir '
+      	. 'VALUES (:unIdCommande, :unIdProduit, :quantite)'
+      );
+      $requetePrepare->bindParam(':unIdCommande', $idCommande, PDO::PARAM_INT);
+      $requetePrepare->bindParam(':unIdProduit', $unIdProduit, PDO::PARAM_INT);
+      $requetePrepare->bindParam(':quantite', $qte, PDO::PARAM_INT);
+      $requetePrepare->execute();
     }
   }
   

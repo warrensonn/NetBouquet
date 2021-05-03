@@ -20,6 +20,11 @@ switch($action)
         $idClient = $client['id'];
         $lesCommandes = $pdo->getCommandesClient($idClient);
 
-        include 'vues/v_historiqueCommandes.php';
+        if (!$lesCommandes) {
+            $message = "Vous n'avez pas encore passé de commande";
+            include 'vues/v_message.php';
+        } else {
+            include 'vues/v_historiqueCommandes.php';
+        }
         break;
 }
