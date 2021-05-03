@@ -7,6 +7,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 USE lafleur ;
 
 
+
 -- Création de la structure de la base de données
 
 # -----------------------------------------------------------------------------
