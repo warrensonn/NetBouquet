@@ -22,8 +22,8 @@ class PdoLafleur
     private static $bdd='dbname=lafleur';
     private static $user='lafleur' ;
     private static $mdp='secret' ;
-	private static $monPdo;
-	private static $monPdoLafleur = null;
+	  private static $monPdo;
+	  private static $monPdoLafleur = null;
 
 
  /**

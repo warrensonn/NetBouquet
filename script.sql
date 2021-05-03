@@ -1,3 +1,13 @@
+-- Script de restauration de l'application "NetBouquet"
+
+-- Administration de la base de données
+CREATE DATABASE IF NOT EXISTS lafleur ;
+GRANT ALL PRIVILEGES ON `lafleur`.* TO lafleur@localhost;
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+USE lafleur ;
+
+
+-- Création de la structure de la base de données
 
 # -----------------------------------------------------------------------------
 #       TABLE : Produit
