@@ -24,6 +24,8 @@ foreach( $lesCategories as $uneCategorie)
 		<a href=index.php?uc=voirProduits&categorie=<?php echo $idCategorie ?>&action=voirProduits><?php echo $libCategorie ?></a>
 	</li>
 <?php
-}
-?>
+} ?>
+	<li>
+		<a href=index.php?uc=voirProduits&action=voirProduits>Tous</a>
+	</li>
 </ul>
