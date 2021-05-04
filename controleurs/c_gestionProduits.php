@@ -16,15 +16,6 @@ $action = $_REQUEST['action'];
 
 switch($action) {
 
-	case 'voirCategories':	   // Affiche les catégories pour la sélection et, par défaut, affiche les produits de la catégorie 'composition'
-		$lesCategories = $pdo->getLesCategories();		// Récupère les catégories
-		include 'vues/v_categories.php';
-
-		$lesProduits = $pdo->getLesProduitsDeCategorie('com');	
-		$categorie = 'com';
-		include 'vues/v_listeProduits.php';
-  		break;
-	
 	case 'Modifier' :		//Permet d’accéder au modification d’un produit, que lorsque l’on est connecté en tant qu’administrateur
 		$idProduit=$_REQUEST['produit'];
 		$unProduit=$pdo->getProduit($idProduit);

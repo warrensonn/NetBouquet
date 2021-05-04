@@ -21,8 +21,7 @@ switch($action)
   		$lesCategories = $pdo->getLesCategories(); 		// Récupère les catégories
 		include 'vues/v_categories.php';
 		
-		$lesProduits = $pdo->getLesProduitsDeCategorie('com');	
-		$categorie = 'com';
+		$lesProduits = $pdo->getToutLesProduits();
 		include 'vues/v_listeProduits.php';
   		break;
 
@@ -30,8 +29,13 @@ switch($action)
 		$lesCategories = $pdo->getLesCategories();
 		include("vues/v_categories.php");
 
-  		$categorie = $_REQUEST['categorie'];	// Récupère la catégorie saisi par l'utilisateur
-		$lesProduits = $pdo->getLesProduitsDeCategorie($categorie);		// Récupère les produits de cette catégorie
+		if (isset($_REQUEST['categorie'])) {
+			$categorie = $_REQUEST['categorie']; 	// Récupère la catégorie saisi par l'utilisateur
+			$lesProduits = $pdo->getLesProduitsDeCategorie($categorie);		// Récupère les produits de cette catégorie
+		} else {	// L'utilisateur a choisi 'tous'
+			$lesProduits = $pdo->getToutLesProduits();		// Récupère tout les produits
+		}
+
 		include 'vues/v_listeProduits.php';
 		break;
 
