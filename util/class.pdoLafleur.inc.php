@@ -108,6 +108,26 @@ class PdoLafleur
  	return $lesLignes; 
  } 
 
+ 
+ /**
+  * getToutLesProduits
+  *
+  * Retourne sous forme d'un tableau associatif tous les produits de la boutique
+  *
+  * @return un tableau associatif
+  */
+ public function getToutLesProduits()
+ {
+     $requetePrepare = PdoLaFleur::$monPdo->prepare(
+ 		'SELECT * '
+ 		. 'FROM Produit '
+ 	);
+ 	$requetePrepare->execute();
+ 	$lesLignes = $requetePrepare->fetchAll();
+ 	return $lesLignes; 
+ } 
+ 
+
 
  /**
   * getLesProduitsDuTableau
