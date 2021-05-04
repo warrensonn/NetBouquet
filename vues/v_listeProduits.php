@@ -30,9 +30,9 @@ foreach( $lesProduits as $unProduit)
 		if(isset($_SESSION['login']))
 		{ 
 			if ($_SESSION['type']=='administrateur') { ?>	
-				<li><a href=index.php?uc=gestionProduits&categorie=<?php echo $categorie ?>&produit=<?php echo $id ?>&action=Modifier> 
+				<li><a href=index.php?uc=gestionProduits&produit=<?php echo $id ?>&action=Modifier> 
 				<img src="images/modifier.png" TITLE="Modifier"></li></a>
-				<li><a href=index.php?uc=gestionProduits&categorie=<?php echo $categorie ?>&produit=<?php echo $id ?>&action=Supprimer onclick="return confirm('Voulez-vous vraiment retirer cet article ?');"> 
+				<li><a href=index.php?uc=gestionProduits&produit=<?php echo $id ?>&action=Supprimer onclick="return confirm('Voulez-vous vraiment retirer cet article ?');"> 
 				<img src="images/supprimer.png" TITLE="Supprimer"></li></a> <?php
 			} else { ?>
 				<li><a href='index.php?uc=voirProduits&categorie=<?php echo $categorie ?>&produit=<?php echo $id ?>&action=ajouterAuPanier'> 

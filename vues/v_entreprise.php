@@ -17,6 +17,9 @@
     <h3> Lafleur, le prince des fleurs sur internet </h3>
     <h4>L’entreprise Lafleur a été fondée en 2002.</h4>
     Nous vous proposons un large choix de produits pour agrémenter vos bureaux en toutes occasions. <br> <br>
-    
+    <b>Nos Coordonnées</b> <br>
+    Adresse : …<br>
+    Tél : …<br>
+    Mail : …<br>
 </div>
 
