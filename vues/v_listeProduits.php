@@ -35,7 +35,7 @@ foreach( $lesProduits as $unProduit)
 				<li><a href=index.php?uc=gestionProduits&produit=<?php echo $id ?>&action=Supprimer onclick="return confirm('Voulez-vous vraiment retirer cet article ?');"> 
 				<img src="images/supprimer.png" TITLE="Supprimer"></li></a> <?php
 			} else { ?>
-				<li><a href='index.php?uc=voirProduits&categorie=<?php echo $categorie ?>&produit=<?php echo $id ?>&action=ajouterAuPanier'> 
+				<li><a href='index.php?uc=voirProduits&produit=<?php echo $id ?>&action=ajouterAuPanier'> 
 				<img src="images/mettrepanier.png" TITLE="Ajouter au panier"> </li></a> <?php
 			}		
 		} ?>
