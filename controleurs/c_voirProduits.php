@@ -23,7 +23,7 @@ switch($action)
 		
 		$lesProduits = $pdo->getLesProduitsDeCategorie('com');	
 		$categorie = 'com';
-		include 'vues/v_listeproduits.php';
+		include 'vues/v_listeProduits.php';
   		break;
 
 	case 'voirProduits' :

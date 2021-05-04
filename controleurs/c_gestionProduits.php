@@ -22,7 +22,7 @@ switch($action) {
 
 		$lesProduits = $pdo->getLesProduitsDeCategorie('com');	
 		$categorie = 'com';
-		include 'vues/v_listeproduits.php';
+		include 'vues/v_listeProduits.php';
   		break;
 	
 	case 'Modifier' :		//Permet d’accéder au modification d’un produit, que lorsque l’on est connecté en tant qu’administrateur
