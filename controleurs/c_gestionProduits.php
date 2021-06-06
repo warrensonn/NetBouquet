@@ -1,15 +1,13 @@
 <?php
-/**
- * Gestion des produits par les administrateurs
- *
- * PHP Version 7
+/** Gestion des produits par les administrateurs
+ *  -------
+ *  @file
+ *  @brief Permet aux administrateurs d'ajouter, de modifier et de supprimer des produits
  * 
- * Permet aux administrateurs d'ajouter, de modifier et de supprimer des produits
- *
- * @category  PPE
- * @package   NetBouquet
- * @author    Bevilacqua Warren <bevilacqua.warren@gmail.com>
- * @version   GIT: <0>
+ *  @category  PPE
+ *  @package   NetBouquet
+ *  @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
+ *  @version   GIT: <0>
  */
 
 $action = $_REQUEST['action'];

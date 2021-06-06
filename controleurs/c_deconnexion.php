@@ -1,15 +1,13 @@
 <?php
-/**
- * Controleur de déconnexion
- *
- * PHP Version 7
+/** Controleur de déconnexion
+ *  -------
+ *  @file
+ *  @brief à l'appel, détruit la session et renvoie à index.php
  * 
- * Si appelé, détruit la session et renvoie à index.php
- *
- * @category  PPE
- * @package   NetBouquet
- * @author    Bevilacqua Warren <bevilacqua.warren@gmail.com>
- * @version   GIT: <0>
+ *  @category  PPE
+ *  @package   NetBouquet
+ *  @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
+ *  @version   GIT: <0>
  */
 
 session_destroy();

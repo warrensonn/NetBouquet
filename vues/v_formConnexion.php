@@ -1,15 +1,13 @@
 <?php
-/**
- * Vue pour se connecter
- *
- * PHP Version 7
+/** Vue de connexion
+ *  -------
+ *  @file
+ *  @brief L'utilisateur peut se connecter en insérant son login et son mot de passe et a aussi l'option de créer un compte si besoin
  * 
- * L'utilisateur peut se connecter en insérant son login et son mot de passe et a aussi l'option de créer un compte si besoin
- *
- * @category  PPE
- * @package   NetBouquet
- * @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
- * @version   GIT: <0>
+ *  @category  PPE
+ *  @package   NetBouquet
+ *  @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
+ *  @version   GIT: <0>
  */
 ?>
 

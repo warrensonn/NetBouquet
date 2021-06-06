@@ -1,15 +1,13 @@
 <?php
-/**
- * Vue du panier
- *
- * PHP Version 7
+/** Vue du panier
+ *  -------
+ *  @file
+ *  @brief Le client peut voir les articles du panier, les supprimer du panier ou augmenter / diminuer la quantité
  * 
- * Le client peut voir les articles du panier, les supprimer du panier ou augmenter / diminuer la quantité
- *
- * @category  PPE
- * @package   NetBouquet
- * @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
- * @version   GIT: <0>
+ *  @category  PPE
+ *  @package   NetBouquet
+ *  @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
+ *  @version   GIT: <0>
  */
 ?>
 

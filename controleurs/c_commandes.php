@@ -1,13 +1,13 @@
 <?php
-/**
- * Affichage de l'historique des commandes du client
- *
- * PHP Version 7
- *
- * @category  PPE
- * @package   NetBouquet
- * @author    Bevilacqua Warren <bevilacqua.warren@gmail.com>
- * @version   GIT: <0>
+/** Affichage de l'historique des commandes du client
+ *  -------
+ *  @file
+ *  @brief Gère la demande d'affichage de l'historique des commandes
+ * 
+ *  @category  PPE
+ *  @package   NetBouquet
+ *  @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
+ *  @version   GIT: <0>
  */
 
 $action = $_REQUEST['action'];

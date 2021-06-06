@@ -1,15 +1,13 @@
 ﻿<?php
-/**
- * Vue récapitulatif avant validation de la commande
- *
- * PHP Version 7
+/** Vue du récapitulatif avant validation de la commande
+ *  -------
+ *  @file
+ *  @brief Le client peut voir les informations sur la commande, le prix et les articles ainsi que leur quantité. Il peut de plus choisir de valider la commande
  * 
- * Le client peut voir les informations sur la commande, le prix et les articles ainsi que leur quantité. Il peut de plus choisir de valider la commande
- *
- * @category  PPE
- * @package   NetBouquet
- * @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
- * @version   GIT: <0>
+ *  @category  PPE
+ *  @package   NetBouquet
+ *  @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
+ *  @version   GIT: <0>
  */
 ?>
 

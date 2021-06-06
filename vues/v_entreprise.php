@@ -1,15 +1,13 @@
 <?php
-/**
- * Vue d'accueil 
- *
- * PHP Version 7
+/** Vue d'acceuil
+ *  -------
+ *  @file
+ *  @brief Vue présentant l'entreprise
  * 
- * La vue présente l'entreprise 
- *
- * @category  PPE
- * @package   NetBouquet
- * @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
- * @version   GIT: <0>
+ *  @category  PPE
+ *  @package   NetBouquet
+ *  @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
+ *  @version   GIT: <0>
  */
 ?>
 

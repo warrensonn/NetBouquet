@@ -1,12 +1,13 @@
 <?php 
-/**
- * Index du projet NetBouquet
+/*! \mainpage Projet NetBouquet
  *
- * PHP Version 7
+ * \section desc Boutique de fleurs en ligne suivant le modèle MVC utilisant PHP Version 7
+ * 
+ * Classe d'accès aux données / Fonctions / Vues / Controleurs détaillés dans cette documentation
  *
  * @category  PPE
  * @package   NetBouquet
- * @author    Bevilacqua Warren <bevilacqua.warren@gmail.com>
+ * @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
  * @version   GIT: <0>
  */
 
@@ -16,7 +17,7 @@ require_once 'util/class.pdoLafleur.inc.php';
 include 'vues/v_entete.php';
 
 if(!isset($_REQUEST['uc']))
-     $uc = 'accueil';
+    $uc = 'accueil';
 else
 	$uc = $_REQUEST['uc'];
 

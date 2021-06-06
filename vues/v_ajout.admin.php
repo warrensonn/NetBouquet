@@ -1,15 +1,12 @@
 ﻿<?php
-/**
- * Vue d'ajout d'un produit
- *
- * PHP Version 7
- * 
- * L'administrateur peut saisir les informations sur le nouveau produit à ajouter
- *
- * @category  PPE
- * @package   NetBouquet
- * @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
- * @version   GIT: <0>
+/** Vue ajout d'un produit
+ *  -------
+ *  @file
+ *  @brief L'administrateur peut saisir les informations sur le nouveau produit à ajouter
+ *  @category  PPE
+ *  @package   NetBouquet
+ *  @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
+ *  @version   GIT: <0>
  */
 ?>
 

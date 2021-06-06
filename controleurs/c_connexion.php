@@ -1,13 +1,13 @@
 <?php
-/**
- * Controleur pour la connexion à un compte, ou la création d'un compte
- *
- * PHP Version 7
- *
- * @category  PPE
- * @package   NetBouquet
- * @author    Bevilacqua Warren <bevilacqua.warren@gmail.com>
- * @version   GIT: <0>
+/** Controleur pour la connexion à un compte, ou la création d'un compte
+ *  -------
+ *  @file
+ *  @brief Permet la connexion ou création d'un compte
+ * 
+ *  @category  PPE
+ *  @package   NetBouquet
+ *  @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
+ *  @version   GIT: <0>
  */
 
 $action = $_REQUEST['action'];

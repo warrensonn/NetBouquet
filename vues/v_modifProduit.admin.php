@@ -1,15 +1,13 @@
 <?php
-/**
- * Vue pour la modification d'un produit
- *
- * PHP Version 7
+/** Vue pour la modification d'un produit
+ *  -------
+ *  @file
+ *  @brief L'administrateur peut modifier un produit au niveau de sa description et de son prix
  * 
- * L'administrateur peut modifier un produit au niveau de sa description et de son prix
- *
- * @category  PPE
- * @package   NetBouquet
- * @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
- * @version   GIT: <0>
+ *  @category  PPE
+ *  @package   NetBouquet
+ *  @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
+ *  @version   GIT: <0>
  */
 ?>
 

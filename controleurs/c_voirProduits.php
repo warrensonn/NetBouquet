@@ -1,15 +1,13 @@
 ﻿<?php
-/**
- * Gestion de l'affichage des produits
- *
- * PHP Version 7
+/** Gestion de l'affichage des produits
+ *  -------
+ *  @file
+ *  @brief Gestion de l'affichage des produits dans l'onglet 'Voir le catalogue de fleurs'
  * 
- * Gestion de l'affichage des produits dans l'onglet 'Voir le catalogue de fleurs'
- *
- * @category  PPE
- * @package   NetBouquet
- * @author    Bevilacqua Warren <bevilacqua.warren@gmail.com>
- * @version   GIT: <0>
+ *  @category  PPE
+ *  @package   NetBouquet
+ *  @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
+ *  @version   GIT: <0>
  */
 
 initPanier();

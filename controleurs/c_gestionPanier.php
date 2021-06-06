@@ -1,15 +1,13 @@
 <?php
-/**
- * Gestion du panier et de son affichage
- *
- * PHP Version 7
+/** Gestion du panier et de son affichage
+ *  -------
+ *  @file
+ *  @brief Regroupe les fonctionnalités liées au panier de l'utilisateur et la prise de commandes
  * 
- * Regroupe les fonctionnalités liées au panier de l'utilisateur et la prise de commandes
- *
- * @category  PPE
- * @package   NetBouquet
- * @author    Bevilacqua Warren <bevilacqua.warren@gmail.com>
- * @version   GIT: <0>
+ *  @category  PPE
+ *  @package   NetBouquet
+ *  @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
+ *  @version   GIT: <0>
  */
 
 $action = $_REQUEST['action'];

@@ -1,15 +1,13 @@
 ﻿<?php
-/**
- * Vue d'affichage des erreurs
- *
- * PHP Version 7
+/** Vue d'affichage des erreurs
+ *  -------
+ *  @file
+ *  @brief L'utilisateur peut voir l'ensemble des erreurs affichées
  * 
- * L'utilisateur peut voir l'ensemble des erreurs affichées
- *
- * @category  PPE
- * @package   NetBouquet
- * @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
- * @version   GIT: <0>
+ *  @category  PPE
+ *  @package   NetBouquet
+ *  @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
+ *  @version   GIT: <0>
  */
 ?>
 

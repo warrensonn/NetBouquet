@@ -1,13 +1,13 @@
 <?php
-/**
- * Vue Entête
- *
- * PHP Version 7
- *
- * @category  PPE
- * @package   NetBouquet
- * @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com>
- * @version   GIT: <0>
+/** Vue entête
+ *  -------
+ *  @file
+ *  @brief Header
+ * 
+ *  @category  PPE
+ *  @package   NetBouquet
+ *  @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
+ *  @version   GIT: <0>
  */
 ?>
 

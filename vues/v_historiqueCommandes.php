@@ -1,15 +1,13 @@
 <?php
-/**
- * Vue historique des commandes du client
- *
- * PHP Version 7
+/** Vue historique des commandes du client
+ *  -------
+ *  @file
+ *  @brief Le client peut voir toutes ses précédentes commandes avec leurs articles, prix, date
  * 
- * Le client peut voir toutes ses précédentes commandes avec leurs articles, prix, date
- *
- * @category  PPE
- * @package   NetBouquet
- * @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
- * @version   GIT: <0>
+ *  @category  PPE
+ *  @package   NetBouquet
+ *  @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
+ *  @version   GIT: <0>
  */
 ?>
 

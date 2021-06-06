@@ -1,16 +1,15 @@
 <?php
-/**
- * Vue liste des catégories de produits
- *
- * PHP Version 7
+/** Vue liste des catégories de produits.
+ *  -------
+ *  @file
+ *  @brief L'utilisateur peut saisir la catégorie de produits dans la liste proposée
  * 
- * L'utilisateur peut saisir la catégorie de produits dans la liste proposée
- *
- * @category  PPE
- * @package   NetBouquet
- * @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
- * @version   GIT: <0>
+ *  @category  PPE
+ *  @package   NetBouquet
+ *  @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
+ *  @version   GIT: <0>
  */
+$title = "v_categories.php";
 ?>
 
 <ul id="categories">

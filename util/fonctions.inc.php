@@ -1,15 +1,13 @@
 ﻿<?php
-/**
- * Fonctions du projet NetBouquet
- *
- * PHP Version 7
+/** Fonctions du projet NetBouquet
+ *  -------
+ *  @file
+ *  @brief Regroupe toutes les fonctions utilisées dans l'application et qui ne font jamais appel à la base de données
  * 
- * Regroupe toutes les fonctions utilisées dans l'application et qui ne font jamais appel à la base de données
- *
- * @category  PPE
- * @package   NetBouquet
- * @author    Bevilacqua Warren <bevilacqua.warren@gmail.com>
- * @version   GIT: <0>
+ *  @category  PPE
+ *  @package   NetBouquet
+ *  @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
+ *  @version   GIT: <0>
  */
 
 /**

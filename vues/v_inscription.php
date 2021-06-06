@@ -1,15 +1,13 @@
 <?php
-/**
- * Vue de la création d'un compte client
- *
- * PHP Version 7
+/** Vue de la création d'un compte client
+ *  -------
+ *  @file
+ *  @brief L'utilisateur doit saisir les informations demandées pour la création d'un compte client
  * 
- * L'utilisateur doit saisir les informations demandées pour la création d'un compte client
- *
- * @category  PPE
- * @package   NetBouquet
- * @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
- * @version   GIT: <0>
+ *  @category  PPE
+ *  @package   NetBouquet
+ *  @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
+ *  @version   GIT: <0>
  */
 ?>
 

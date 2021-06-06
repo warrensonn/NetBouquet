@@ -1,21 +1,17 @@
 ﻿<?php
-/** 
- * Classe d'accès aux données. 
+/** Classe d'accès aux données
+ *  -------
+ *  @file
+ *  @brief Utilise les services de la classe PDO pour l'application lafleur.
+ *  @brief Les attributs sont tous statiques, les 4 premiers pour la connexion, $monPdo de type PDO, $monPdoLaFleur qui contiendra l'unique instance de la classe
  * 
- * Utilise les services de la classe PDO
- * pour l'application lafleur
- * Les attributs sont tous statiques,
- * les 4 premiers pour la connexion
- * $monPdo de type PDO 
- * $monPdoLaFleur qui contiendra l'unique instance de la classe
- *
- * @package 	default
- * @author		Patrice Grand
- * @author 		Bevilacqua Warren
- * @version     1.0
- * @link        http://www.php.net/manual/fr/book.pdo.php
+ *  @category  PPE
+ *  @package   NetBouquet
+ *  @author		 Patrice Grand
+ *  @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
+ *  @version   GIT: <0>
+ *  @link      http://www.php.net/manual/fr/book.pdo.php
  */
-
 class PdoLafleur
 {   		
     private static $serveur='mysql:host=localhost';

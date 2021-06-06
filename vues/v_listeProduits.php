@@ -1,15 +1,13 @@
 <?php
-/**
- * Vue des produits d'une catégorie
- *
- * PHP Version 7
+/** Vue des produits d'une catégorie choisie
+ *  -------
+ *  @file
+ *  @brief L'utilisateur voit la liste des produits et peut les ajouter à son panier
  * 
- * L'utilisateur voit la liste des produits et peut les ajouter à son panier
- *
- * @category  PPE
- * @package   NetBouquet
- * @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
- * @version   GIT: <0>
+ *  @category  PPE
+ *  @package   NetBouquet
+ *  @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
+ *  @version   GIT: <0>
  */
 ?>
 

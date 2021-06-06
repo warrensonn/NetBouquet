@@ -1,13 +1,13 @@
 ﻿<?php
-/**
- * Vue affichant les messages
- *
- * PHP Version 7
- *
- * @category  PPE
- * @package   NetBouquet
- * @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
- * @version   GIT: <0>
+/** Vue affichant les messages
+ *  -------
+ *  @file
+ *  @brief Affichage des messages
+ * 
+ *  @category  PPE
+ *  @package   NetBouquet
+ *  @author    Warren BEVILACQUA <bevilacqua.warren@gmail.com
+ *  @version   GIT: <0>
  */
 ?>
 
