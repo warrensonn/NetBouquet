@@ -206,66 +206,95 @@ return  preg_match ('#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#', $mail);
 
 
 /**
- * getErreursSaisieCommande
+ * getErreursCreationCompte
  * 
- * Retourne un tableau d'erreurs de saisie pour une commande
+ * Retourne un tableau d'erreurs de saisie pour la création d'un compte
  *
- * @param String $nom 	 la raison sociale
- * @param String $login	 le login choisi
- * @param String $mdp	 Le mot de passe choisi
- * @param String $rue 	 la rue
- * @param String $ville  la ville
- * @param String $cp 	 le cp
- * @param String $mail 	 le mail 
+ * @param String $raisonSociale 	la raison sociale
+ * @param String $login	 			le login choisi
+ * @param String $mdp	 			Le mot de passe choisi
+ * @param String $rue 	 			la rue
+ * @param String $cp 	 			le cp
+ * @param String $ville  			la ville
+ * @param String $mail 	 			le mail 
  * 
  * @return : un tableau de chaînes d'erreurs
  */
-function getErreursSaisieCommande($raisonSociale, $login, $mdp, $rue, $ville, $cp, $mail)
+function getErreursCreationCompte($raisonSociale, $login, $mdp, $adresse, $cp, $ville, $mail)
 {
 	$lesErreurs = array();
 	if($raisonSociale == "")
 	{
-		$lesErreurs[]="Il faut saisir le champ nom";
+		$lesErreurs[]="Il faut saisir le champ 'Raison Sociale'";
 	}
+
 	if($login == "")
 	{
 		$lesErreurs[]="Il faut saisir le champ nom";
+	} elseif (strlen($login) < 4) {
+		$lesErreurs[]="Votre login doit être composé d'au moins 4 caractères";
 	}
+
 	if($mdp == "")
 	{
-		$lesErreurs[]="Il faut saisir le champ nom";
+		$lesErreurs[]="Il faut saisir le champ 'Mot de passe'";
+	} elseif (strlen($mdp) < 5) {
+		$lesErreurs[]="Votre mot de passe doit être composé d'au moins 5 caractères";
 	}
-	if($rue == "")
+
+	if($adresse == "")
 	{
-	$lesErreurs[]="Il faut saisir le champ rue";
+		$lesErreurs[]="Il faut saisir le champ rue";
+	} elseif (is_numeric($adresse)) {
+		$lesErreurs[]="Veuillez saisir le nom de votre rue";
 	}
-	if($ville == "")
-	{
-		$lesErreurs[]="Il faut saisir le champ ville";
-	}
+
 	if($cp == "")
 	{
-		$lesErreurs[]="Il faut saisir le champ Code postal";
+		$lesErreurs[]="Il faut saisir le champ 'Code postal'";
+	} elseif(!estUnCp($cp)) {
+		$lesErreurs[]= "Erreur de Code postal";
 	}
-	else
+
+	if($ville == "")
 	{
-		if(!estUnCp($cp))
-		{
-			$lesErreurs[]= "erreur de code postal";
-		}
+		$lesErreurs[]="Il faut saisir le champ 'Ville'";
 	}
+
 	if($mail == "")
 	{
-		$lesErreurs[]="Il faut saisir le champ mail";
+		$lesErreurs[]="Il faut saisir le champ 'Mail'";
+	} elseif (!estUnMail($mail)) {
+		$lesErreurs[]= "Erreur de mail";
 	}
-	else
-	{
-		if(!estUnMail($mail))
-		{
-			$lesErreurs[]= "erreur de mail";
-		}
-	}
+
 	return $lesErreurs;
 }
 
+
+/**
+ * modifierProduit
+ * 
+ * Retourne un tableau d'erreurs de saisie pour la modification d'un produit
+ *
+ * @param String $description
+ * @param Int	 $prix 
+ * 
+ * @return : un tableau de chaînes d'erreurs
+ */
+function modifierProduit($description, $prix)
+{
+	$lesErreurs = array();
+	if($description == "" || is_numeric($description))
+	{
+		$lesErreurs[]="Il faut saisir le champ 'Description'";
+	}
+
+	if(!is_numeric($prix) || $prix == 0)
+	{
+		$lesErreurs[]="Il faut saisir un prix supérieur à 0";
+	}
+
+	return $lesErreurs;
+}
 ?>

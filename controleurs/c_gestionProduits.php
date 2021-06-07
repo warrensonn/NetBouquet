@@ -25,13 +25,19 @@ switch($action) {
 		$description = $_POST['description'];
 		$prix = $_POST['prix'];
 
-		$statut=$pdo->modifiValeur($idProduit, $description, $prix);	// Modifie les caractéristiques du produit
-		$unProduit=$pdo->getProduit($idProduit);
+		$msgErreurs = modifierProduit($description, $prix);
 
-		$message = 'Modification réussite, voici les nouvelles caractéristique du produit numéro ' . $idProduit . ' :';
-		$message2 = 'Nom -> ' . $description . ' et Prix -> ' . $prix . '€';
-		include 'vues/v_message.php';
+		if (!empty($msgErreurs)) {
+			include 'vues/v_erreurs.php';
+		} else {
+			$statut=$pdo->modifiValeur($idProduit, $description, $prix);	// Modifie les caractéristiques du produit
+			$unProduit=$pdo->getProduit($idProduit);
 
+			$message = 'Modification réussite, voici les nouvelles caractéristique du produit numéro ' . $idProduit . ' :';
+			$message2 = 'Nom -> ' . $description . ' et Prix -> ' . $prix . '€';
+			include 'vues/v_message.php';
+		}
+		
 		$lesCategories = $pdo->getLesCategories();
 		include 'vues/v_categories.php';
 		break;
@@ -64,9 +70,9 @@ switch($action) {
 			include 'vues/v_message.php';
 		} else {
 			$message = "L'article a bien été ajouté";
-			include 'vues/v_message.php';		
+			include 'vues/v_message.php';
 		}
-		include 'vues/v_ajout.admin.php';	
+		include 'vues/v_ajout.admin.php';
 		break;
 
 }

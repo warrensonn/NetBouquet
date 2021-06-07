@@ -52,13 +52,19 @@ switch ($action) {
 		$cp = $_REQUEST['cp'];
 		$ville = $_REQUEST['ville'];
 		$mail = $_REQUEST['mail'];
-
-		$pdo->creationCompte($raisonSociale, $login, $mdp, $adresse, $cp, $ville, $mail);
 		
-		$_SESSION['login'] = $login;
-        $_SESSION['type'] = 'client';
-		$_SESSION['inscription'] = 1;
-		header('Location: index.php');
+		$msgErreurs = getErreursCreationCompte($raisonSociale, $login, $mdp, $adresse, $cp, $ville, $mail);
+
+		if (!empty($msgErreurs)) {
+			include 'vues/v_erreurs.php';
+		} else {
+			$pdo->creationCompte($raisonSociale, $login, $mdp, $adresse, $cp, $ville, $mail);
+			$_SESSION['login'] = $login;
+       		$_SESSION['type'] = 'client';
+			$_SESSION['inscription'] = 1;
+			header('Location: index.php');
+		}
+		
 		break;
 }
 ?>
